@@ -19,6 +19,8 @@ dataHandler = {
     },
     getBoards: function(callback) {
         // the boards are retrieved and then the callback function is called with the boards
+        var boards = JSON.parse(localStorage.getItem(keyInLocalStorage)).boards;
+        return boards;
     },
     getBoard: function(boardId, callback) {
         // the board is retrieved and then the callback function is called with the board
