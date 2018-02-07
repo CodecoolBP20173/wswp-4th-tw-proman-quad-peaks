@@ -99,5 +99,16 @@ dataHandler = {
             }
         }
         return max_id + 1;
+    },
+    setActiveStatusForBoard: function (status, boardId) {
+        for(let i =0; i < this._data.boards.length; i++)
+        {
+            if(this._data.boards[i].id == boardId)
+            {
+                this._data.boards[i].is_active = status;
+                break;
+            }
+        }
+        this._saveData();
     }
 };

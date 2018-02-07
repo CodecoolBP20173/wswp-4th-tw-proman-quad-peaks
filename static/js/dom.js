@@ -42,11 +42,22 @@ dom = {
                 dom.setSelectedAddButon(board.id);
             });
             buttonRow.appendChild(addCardButton);
-            newBoard.className = "btn btn-link collapsed col text-left" ;
+            newBoard.className = "btn btn-link col text-left";
             newBoard.setAttribute('data-toggle', 'collapse');
             newBoard.setAttribute('data-target', '#collapse' + i);
-            newBoard.setAttribute('aria-expanded', 'false');
+            newBoard.setAttribute('aria-expanded', String(board.is_active));
             newBoard.setAttribute('aria-controls', 'collapse' + i);
+            newBoard.addEventListener('click' , function () {
+                let reverseStatus;
+                if(this.getAttribute('aria-expanded') === 'true')
+                {
+                    reverseStatus = 'false';
+                }
+                else{
+                    reverseStatus = 'true';
+                }
+               dataHandler.setActiveStatusForBoard(reverseStatus, board.id);
+            });
             let statuses = dataHandler.getStatues();
             let newBoardContent = document.createElement("div");
             let statusRow = document.createElement('div');
@@ -63,9 +74,13 @@ dom = {
                 column.innerHTML = statuses[j].name;
                 columns.push(column);
             }
-            newBoardContent.className = 'collapse col';
+            newBoardContent.className = 'col container collapse';
+            console.log(board.is_active);
+            if(board.is_active === "true")
+            {
+                newBoardContent.classList.add('show')
+            }
             newBoardContent.id = 'collapse' + i;
-            newBoardContent.classList.add('container');
             boardsParent.appendChild(newBoardContent);
 
             dom.showCards(cards,columns);
