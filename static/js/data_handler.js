@@ -50,6 +50,15 @@ dataHandler = {
     },
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+        this._data.cards.push({
+            "id": this.generateCardId(),
+            "title": cardTitle,
+            "board_id": boardId,
+            "status_id": statusId,
+            "order": 0
+        },);
+        this._saveData();
+        this.getCardsByBoardId(boardId, callback)
     },
     // here comes more features
     generateBoardId: function () {
@@ -58,6 +67,20 @@ dataHandler = {
         for(let i =0;i<boards.length;i++)
         {
             let currentId = parseInt(boards[i].id);
+            if(currentId > max_id)
+            {
+                max_id = currentId;
+            }
+        }
+        return max_id;
+    }
+
+    generateCardId: function () {
+        var cards = this._data.cards;
+        max_id = 0;
+        for(let i =0;i<cards.length;i++)
+        {
+            let currentId = parseInt(cards[i].id);
             if(currentId > max_id)
             {
                 max_id = currentId;
