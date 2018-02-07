@@ -45,7 +45,7 @@ dom = {
             newBoard.className = "btn btn-link col text-left";
             newBoard.setAttribute('data-toggle', 'collapse');
             newBoard.setAttribute('data-target', '#collapse' + i);
-            newBoard.setAttribute('aria-expanded', String(board.is_active));
+            newBoard.setAttribute('aria-expanded', board.is_active);
             newBoard.setAttribute('aria-controls', 'collapse' + i);
             newBoard.addEventListener('click' , function () {
                 let reverseStatus;
@@ -75,8 +75,7 @@ dom = {
                 columns.push(column);
             }
             newBoardContent.className = 'col container collapse';
-            console.log(board.is_active);
-            if(board.is_active === "true")
+            if(board.is_active === 'true')
             {
                 newBoardContent.classList.add('show')
             }

@@ -56,7 +56,7 @@ dataHandler = {
         this._data.boards.push({
             "id": this.generateBoardId(),
             "title": boardTitle,
-            "is_active": true
+            "is_active": 'true'
         });
         this._saveData();
         this.getBoards(callback);
