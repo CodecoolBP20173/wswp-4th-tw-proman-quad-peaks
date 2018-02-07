@@ -34,9 +34,22 @@ dataHandler = {
     },
     getCardsByBoardId: function(boardId, callback) {
         // the cards are retrieved and then the callback function is called with the cards
+        let allCards = this._data.cards;
+        let cardsByBoardId = [];
+        for(let i = 0; i < allCards.length; i++)
+        {
+            if(allCards[i].board_id === boardId)
+            {
+                cardsByBoardId.push(allCards[i]);
+            }
+        }
+        return cardsByBoardId;
     },
     getCard: function(cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
+    },
+    getStatues: function () {
+      return this._data.statuses;
     },
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
@@ -50,6 +63,15 @@ dataHandler = {
     },
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+        this._data.cards.push({
+            "id": this.generateCardId(),
+            "title": cardTitle,
+            "board_id": boardId,
+            "status_id": statusId,
+            "order": 0
+        },);
+        this._saveData();
+        callback(this._data.boards);
     },
     // here comes more features
     generateBoardId: function () {
@@ -63,6 +85,19 @@ dataHandler = {
                 max_id = currentId;
             }
         }
-        return max_id;
+        return max_id + 1;
+    },
+    generateCardId: function () {
+        var cards = this._data.cards;
+        max_id = 0;
+        for(let i =0;i<cards.length;i++)
+        {
+            let currentId = parseInt(cards[i].id);
+            if(currentId > max_id)
+            {
+                max_id = currentId;
+            }
+        }
+        return max_id + 1;
     }
 };

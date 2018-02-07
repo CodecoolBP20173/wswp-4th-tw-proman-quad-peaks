@@ -36,6 +36,13 @@ sampleData = {
     ],
     "cards": [
         {
+            "id": 0,
+            "title": "task1_copy",
+            "board_id": 1,
+            "status_id": 1,
+            "order": 4
+        },
+        {
             "id": 1,
             "title": "task1",
             "board_id": 1,
