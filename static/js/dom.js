@@ -2,7 +2,9 @@
 dom = {
     loadBoards: function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
-            dataHandler.createNewBoard(document.getElementById('newBoardInput').value, dom.showBoards)
+            var boardInput = document.getElementById('newBoardInput');
+            dataHandler.createNewBoard(boardInput.value, dom.showBoards)
+            boardInput.value = '';
         });
        dataHandler.getBoards(this.showBoards);
     },
