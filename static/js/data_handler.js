@@ -34,9 +34,22 @@ dataHandler = {
     },
     getCardsByBoardId: function(boardId, callback) {
         // the cards are retrieved and then the callback function is called with the cards
+        let allCards = this._data.cards;
+        let cardsByBoardId = [];
+        for(let i = 0; i < allCards.length; i++)
+        {
+            if(allCards[i].board_id === boardId)
+            {
+                cardsByBoardId.push(allCards[i]);
+            }
+        }
+        return cardsByBoardId;
     },
     getCard: function(cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
+    },
+    getStatues: function () {
+      return this._data.statuses;
     },
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
@@ -63,6 +76,6 @@ dataHandler = {
                 max_id = currentId;
             }
         }
-        return max_id;
+        return max_id + 1;
     }
 };
