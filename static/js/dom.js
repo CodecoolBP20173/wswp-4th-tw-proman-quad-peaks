@@ -3,7 +3,7 @@ dom = {
     loadBoards: function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
             var boardInput = document.getElementById('newBoardInput');
-            dataHandler.createNewBoard(boardInput.value, dom.showBoards)
+            dataHandler.createNewBoard(boardInput.value, dom.showBoards);
             boardInput.value = '';
         });
        dataHandler.getBoards(this.showBoards);
