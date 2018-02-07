@@ -71,7 +71,7 @@ dataHandler = {
             "order": 0
         },);
         this._saveData();
-        this.getCardsByBoardId(boardId, callback)
+        callback(this._data.boards);
     },
     // here comes more features
     generateBoardId: function () {
@@ -86,8 +86,7 @@ dataHandler = {
             }
         }
         return max_id + 1;
-    }
-
+    },
     generateCardId: function () {
         var cards = this._data.cards;
         max_id = 0;
@@ -99,6 +98,6 @@ dataHandler = {
                 max_id = currentId;
             }
         }
-        return max_id;
+        return max_id + 1;
     }
 };

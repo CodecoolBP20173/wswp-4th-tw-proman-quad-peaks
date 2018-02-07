@@ -1,10 +1,18 @@
 // It uses data_handler.js to visualize elements
 dom = {
+    global : {
+        selectedAddButtonBoardId : 0,
+    },
     loadBoards: function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
             var boardInput = document.getElementById('newBoardInput');
             dataHandler.createNewBoard(boardInput.value, dom.showBoards);
             boardInput.value = '';
+        });
+        document.getElementById('addCardSaveButton').addEventListener('click', function () {
+            var cardTitleInput = document.getElementById('newCardInput');
+            dataHandler.createNewCard(cardTitleInput.value,dom.global.selectedAddButtonBoardId,1,dom.showBoards);
+            cardTitleInput.value = '';
         });
        dataHandler.getBoards(this.showBoards);
     },
@@ -22,6 +30,18 @@ dom = {
             boardsParent.appendChild(newBoard);
             let title = board.title;
             newBoard.innerHTML = title;
+            let addCardButton = document.createElement('button');
+            //  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#boardAddModal">
+            let buttonRow = document.createElement('div');
+            buttonRow.classList.add('row');
+            addCardButton.className = "btn btn-primary";
+            addCardButton.setAttribute("data-toggle", "modal");
+            addCardButton.setAttribute("data-target", "#cardAddModal");
+            addCardButton.innerHTML = 'Add Card';
+            addCardButton.addEventListener('click', function () {
+                dom.setSelectedAddButon(board.id);
+            });
+            buttonRow.appendChild(addCardButton);
             newBoard.className = "btn btn-link collapsed col text-left" ;
             newBoard.setAttribute('data-toggle', 'collapse');
             newBoard.setAttribute('data-target', '#collapse' + i);
@@ -29,14 +49,15 @@ dom = {
             newBoard.setAttribute('aria-controls', 'collapse' + i);
             let statuses = dataHandler.getStatues();
             let newBoardContent = document.createElement("div");
-            let row = document.createElement('div');
-            row.classList.add('row');
-            newBoardContent.appendChild(row);
+            let statusRow = document.createElement('div');
+            statusRow.classList.add('row');
+            newBoardContent.appendChild(buttonRow);
+            newBoardContent.appendChild(statusRow);
             let columns =[];
             for(let j = 0; j < statuses.length; j++)
             {
                 let column = document.createElement('div');
-                row.appendChild(column);
+                statusRow.appendChild(column);
                 column.id = statuses[j].id;
                 column.classList.add('col');
                 column.innerHTML = statuses[j].name;
@@ -70,6 +91,9 @@ dom = {
                 }
             }
         }
+    },
+    setSelectedAddButon : function (boardId) {
+        this.global.selectedAddButtonBoardId = boardId;
     }
     // here comes more features
 };
