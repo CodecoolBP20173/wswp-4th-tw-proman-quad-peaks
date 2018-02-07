@@ -1,19 +1,21 @@
 // It uses data_handler.js to visualize elements
 dom = {
     loadBoards: function() {
-        dataHandler.init();
-        let boards = dataHandler.getBoards();
-        dom.showBoards(boards)
-        // retrieves boards and makes showBoards called
+        document.getElementById('addBoardSaveButton').addEventListener('click', function () {
+            dataHandler.createNewBoard(document.getElementById('newBoardInput').value, dom.showBoards)
+        });
+       dataHandler.getBoards(this.showBoards);
     },
-    showBoards: function(boards) {
+    showBoards: function(boards_) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
 
         let boardsParent = document.getElementById('boards');
+        boardsParent.innerHTML='';
         boardsParent.classList.add('container');
-        for (let i = 0;  i < boards.length; i++) {
-            let board = boards[i];
+        for (let i = 0; i < boards_.length; i++) {
+
+            let board = boards_[i];
             let newBoard = document.createElement("button");
             boardsParent.appendChild(newBoard);
             let title = board.title;
