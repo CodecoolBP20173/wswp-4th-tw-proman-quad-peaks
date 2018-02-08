@@ -42,6 +42,10 @@ dom = {
             });
             buttonRow.appendChild(addCardButton);
             newBoard.className = "btn btn-link col text-left";
+            if(board.is_active === 'true')
+            {
+                newBoard.classList.add("opened");
+            }
             newBoard.setAttribute('data-toggle', 'collapse');
             newBoard.setAttribute('data-target', '#collapse' + i);
             newBoard.setAttribute('aria-expanded', board.is_active);
@@ -50,9 +54,11 @@ dom = {
                 let reverseStatus;
                 if(this.getAttribute('aria-expanded') === 'true')
                 {
+                    this.classList.remove("opened");
                     reverseStatus = 'false';
                 }
                 else{
+                    this.classList.add("opened");
                     reverseStatus = 'true';
                 }
                dataHandler.setActiveStatusForBoard(reverseStatus, board.id);
