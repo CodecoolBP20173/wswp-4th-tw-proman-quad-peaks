@@ -99,11 +99,13 @@ dom = {
             {
                 if(cards[i].status_id == columns[j].id.substring(2,3))
                 {
+                    let cardContainer = document.createElement('div');
                     let newCard = document.createElement('div');
                     newCard.id = cards[i].id;
                     newCard.innerHTML = cards[i].title;
                     newCard.setAttribute('order', cards[i].order);
-                    columns[j].appendChild(newCard);
+                    cardContainer.appendChild(newCard);
+                    columns[j].appendChild(cardContainer);
                 }
             }
         }
@@ -112,25 +114,21 @@ dom = {
         this.global.selectedAddButtonBoardId = boardId;
     },
     onDrop: function (el, target) {
-        let card_id = parseInt(el.id);
+        let card_id = parseInt(el.firstChild.id);
         let newStatus_id = parseInt(target.id.substring(2,3));
         let newBoard_id = parseInt(target.id.substring(0,1));
         dom.setCardOrder(target);
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
     },
-
-
     setCardOrder: function (column) {
         // To be called RIGHT AFTER drag-and-dropping a card
         // Parameter: the 'columns' div of the board, on which the card was moved
         // Goes through all columns (of one board), and sets the 'order' attribute of ALL cards in each
         // column to the current order, as they are found in the DOM tree.
-        console.log(column);
         let cardList = column.childNodes;
         for (let j = 1; j < cardList.length; j++) {
-            console.log(cardList[j]);
             cardList[j].setAttribute('order', j);
-            var card_id = parseInt(cardList[j].id);
+            var card_id = parseInt(cardList[j].firstChild.id);
             dataHandler.setOrderForCard(card_id,j);
         }
     }
