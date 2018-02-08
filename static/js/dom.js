@@ -60,17 +60,25 @@ dom = {
             let statuses = dataHandler.getStatues();
             let newBoardContent = document.createElement("div");
             let statusRow = document.createElement('div');
+            let cardRow = document.createElement('div');
+            cardRow.classList.add('row');
+            cardRow.innerHTML = '&nbsp;';
             statusRow.classList.add('row');
+            statusRow.innerHTML = '&nbsp;';
             newBoardContent.appendChild(buttonRow);
             newBoardContent.appendChild(statusRow);
+            newBoardContent.appendChild(cardRow);
             let columns =[];
             for(let j = 0; j < statuses.length; j++)
             {
                 let column = document.createElement('div');
-                statusRow.appendChild(column);
+                cardRow.appendChild(column);
                 column.id = board.id + "/"+ statuses[j].id;
                 column.classList.add('col');
-                column.innerHTML = statuses[j].name;
+                let statusHeader = document.createElement('div');
+                statusHeader.className = 'status_header col';
+                statusHeader.innerHTML = statuses[j].name;
+                statusRow.appendChild(statusHeader);
                 columns.push(column);
                 drag_containers.containers.push(column);
             }
@@ -97,9 +105,10 @@ dom = {
         {
             for(let j = 0; j < columns.length; j++)
             {
-                if(cards[i].status_id == columns[j].id.substring(2,3))
+                if(cards[i].status_id == columns[j].id.split('/')[1])
                 {
                     let cardContainer = document.createElement('div');
+                    cardContainer.className = 'card_container';
                     let newCard = document.createElement('div');
                     newCard.id = cards[i].id;
                     newCard.innerHTML = cards[i].title;
@@ -115,8 +124,10 @@ dom = {
     },
     onDrop: function (el, target) {
         let card_id = parseInt(el.firstChild.id);
-        let newStatus_id = parseInt(target.id.substring(2,3));
-        let newBoard_id = parseInt(target.id.substring(0,1));
+        let ids = target.id.split('/');
+        console.log(ids);
+        let newBoard_id = parseInt(ids[0]);
+        let newStatus_id = parseInt(ids[1]);
         dom.setCardOrder(target);
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
     },
@@ -126,7 +137,7 @@ dom = {
         // Goes through all columns (of one board), and sets the 'order' attribute of ALL cards in each
         // column to the current order, as they are found in the DOM tree.
         let cardList = column.childNodes;
-        for (let j = 1; j < cardList.length; j++) {
+        for (let j = 0; j < cardList.length; j++) {
             cardList[j].setAttribute('order', j);
             var card_id = parseInt(cardList[j].firstChild.id);
             dataHandler.setOrderForCard(card_id,j);
