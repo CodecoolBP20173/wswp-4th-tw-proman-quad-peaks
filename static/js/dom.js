@@ -19,7 +19,7 @@ dom = {
     showBoards: function(boards_) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
-
+        var drag_containers = dragula({}).on('drop', dom.onDrop);
         let boardsParent = document.getElementById('boards');
         boardsParent.innerHTML='';
         boardsParent.classList.add('container');
@@ -69,11 +69,13 @@ dom = {
             {
                 let column = document.createElement('div');
                 statusRow.appendChild(column);
-                column.id = statuses[j].id;
+                column.id = board.id + "/"+ statuses[j].id;
                 column.classList.add('col');
                 column.innerHTML = statuses[j].name;
                 columns.push(column);
+                drag_containers.containers.push(column);
             }
+
             newBoardContent.className = 'col container collapse';
             if(board.is_active === 'true')
             {
@@ -81,7 +83,6 @@ dom = {
             }
             newBoardContent.id = 'collapse' + i;
             boardsParent.appendChild(newBoardContent);
-
             dom.showCards(cards,columns);
         }
 
@@ -97,9 +98,10 @@ dom = {
         {
             for(let j = 0; j < columns.length; j++)
             {
-                if(cards[i].status_id == columns[j].id)
+                if(cards[i].status_id == columns[j].id.substring(2,3))
                 {
                     let newCard = document.createElement('div');
+                    newCard.id = cards[i].id;
                     newCard.innerHTML = cards[i].title;
                     newCard.setAttribute('order', cards[i].order);
                     columns[j].appendChild(newCard);
@@ -109,6 +111,16 @@ dom = {
     },
     setSelectedAddButon : function (boardId) {
         this.global.selectedAddButtonBoardId = boardId;
+    },
+    onDrop: function (el, target) {
+        let card_id = parseInt(el.id);
+        let newStatus_id = parseInt(target.id.substring(2,3));
+        let newBoard_id = parseInt(target.id.substring(0,1));
+        console.log(card_id);
+        console.log(newBoard_id);
+        console.log(newStatus_id);
+        console.log(target.id);
+        dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
     },
 
 
