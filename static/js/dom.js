@@ -19,7 +19,8 @@ dom = {
     showBoards: function(boards_) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
-
+        var drag_containers = dragula({
+        });
         let boardsParent = document.getElementById('boards');
         boardsParent.innerHTML='';
         boardsParent.classList.add('container');
@@ -73,7 +74,9 @@ dom = {
                 column.classList.add('col');
                 column.innerHTML = statuses[j].name;
                 columns.push(column);
+                drag_containers.containers.push(column);
             }
+
             newBoardContent.className = 'col container collapse';
             if(board.is_active === 'true')
             {
@@ -81,7 +84,6 @@ dom = {
             }
             newBoardContent.id = 'collapse' + i;
             boardsParent.appendChild(newBoardContent);
-
             dom.showCards(cards,columns);
         }
 
