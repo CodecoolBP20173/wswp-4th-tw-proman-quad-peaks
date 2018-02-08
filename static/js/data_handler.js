@@ -43,6 +43,7 @@ dataHandler = {
                 cardsByBoardId.push(allCards[i]);
             }
         }
+        dataHandler.putCardsInOrder(cardsByBoardId);
         return cardsByBoardId;
     },
     getCard: function(cardId, callback) {
@@ -110,5 +111,15 @@ dataHandler = {
             }
         }
         this._saveData();
+    },
+
+    putCardsInOrder: function (cards) {
+        for( let i = 0; i < cards.length; i++){
+            let temp = cards[i];
+            for (var j = i-1; j >= 0 && cards[j].order > temp.order; j--){
+                cards[j+1] = cards[j];
+            }
+            cards[j+1] = temp;
+        }
     }
 };
