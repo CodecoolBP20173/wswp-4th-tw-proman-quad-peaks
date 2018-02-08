@@ -33,7 +33,7 @@ dom = {
             let addCardButton = document.createElement('button');
             let buttonRow = document.createElement('div');
             buttonRow.classList.add('row');
-            addCardButton.className = "btn btn-primary";
+            addCardButton.className = "btn btn-primary d-flex justify-content-center";
             addCardButton.setAttribute("data-toggle", "modal");
             addCardButton.setAttribute("data-target", "#cardAddModal");
             addCardButton.innerHTML = 'Add Card';
