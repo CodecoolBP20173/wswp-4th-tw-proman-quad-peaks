@@ -26,12 +26,12 @@ sampleData = {
         {
             "id": 1,
             "title": "Test Board 1",
-            "is_active": true
+            "is_active": "true"
         },
         {
             "id": 2,
             "title": "Test Board 2",
-            "is_active": true
+            "is_active": "true"
         }
     ],
     "cards": [
