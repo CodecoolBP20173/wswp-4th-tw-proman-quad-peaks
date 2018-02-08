@@ -1,3 +1,111 @@
-#boards {
-    background-color: green;
+
+h1 {
+    font-family: 'Monoton', cursive !important;
+    font-size: 8em !important;
 }
+
+#addBoardButton {
+    position: fixed;
+    top:25% !important;
+    padding-top: 1%;
+    padding-bottom: 1%;
+
+}
+body {
+    padding: auto;
+    align-content: center !important ;
+
+}
+#boards {
+    margin-top: 5%;
+    margin-bottom: 10px;
+    align-content: center;
+    padding: 0 !important ;
+    max-width: 80% !important;
+
+
+
+
+
+}
+
+.status_header {
+
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.5em;
+    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+}
+.col > .row > .col {
+    max-width: 25%;
+    border-right: 1px solid black;
+
+}
+.col > .row > .col:nth-child(4n) {
+    border-right: none;
+
+
+}
+
+
+.card_container {
+
+
+    border: 2px solid black;
+    max-width: 90%;
+    word-break: break-all;
+    background: linear-gradient(135deg, rgba(247,247,247,1) 0%, rgba(227,227,227,1) 64%, rgba(240,240,240,1) 75%, rgba(255,255,255,1) 93%, rgba(255,255,255,1) 99%);
+    color: black;
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+.card_container div {
+    font-size: 1.5em;
+    font-family: 'Cutive Mono', monospace, Serif;
+}
+.col > .row > .col > div:hover {
+
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+    -webkit-transition: 0.5s;
+}
+.gu-transit {
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+}
+
+
+.btn.btn-link {
+    background-color: rgba(119, 112, 112, 0.91) !important;
+    color: white !important;
+    text-decoration: none !important;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgb(74, 74, 74) 0%, rgb(72, 80, 94) 44%, rgb(94, 94, 94) 61%, rgba(196,196,196,1) 100%);
+    font-size: 1.5em;
+
+}
+
+.btn.btn-link:hover {
+    background-color: #999590 !important;
+
+    -webkit-transition-duration: 0.5s !important;
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+
+}
+
+.btn.btn-primary  {
+    background-color: #ff4c13 !important;
+}
+
+.btn.btn-primary:hover  {
+    background-color: #ff4c13 !important;
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+}
+
+
+

@@ -54,7 +54,7 @@ dataHandler = {
     },
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
-        this._data.boards.push({
+        this._data.boards.unshift({
             "id": this.generateBoardId(),
             "title": boardTitle,
             "is_active": 'true'
