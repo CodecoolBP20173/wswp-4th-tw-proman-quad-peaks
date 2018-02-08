@@ -6,13 +6,29 @@ dom = {
     loadBoards: function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
             var boardInput = document.getElementById('newBoardInput');
-            dataHandler.createNewBoard(boardInput.value, dom.showBoards);
-            boardInput.value = '';
+            if(boardInput.value.length > 0)
+            {
+                dataHandler.createNewBoard(boardInput.value, dom.showBoards);
+                boardInput.value = '';
+            }
+            else
+            {
+                alert('Board title should be at least 1 character long');
+            }
+
         });
         document.getElementById('addCardSaveButton').addEventListener('click', function () {
             var cardTitleInput = document.getElementById('newCardInput');
-            dataHandler.createNewCard(cardTitleInput.value,dom.global.selectedAddButtonBoardId,1,dom.showBoards);
-            cardTitleInput.value = '';
+            if(cardTitleInput.value.length > 0)
+            {
+                dataHandler.createNewCard(cardTitleInput.value,dom.global.selectedAddButtonBoardId,1,dom.showBoards);
+                cardTitleInput.value = '';
+            }
+            else
+            {
+                alert('Card title should be at least 1 character long');
+            }
+
         });
        dataHandler.getBoards(this.showBoards);
     },
