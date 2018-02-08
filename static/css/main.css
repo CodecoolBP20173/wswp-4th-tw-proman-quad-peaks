@@ -11,6 +11,7 @@ h1 {
     padding-top: 1%;
     padding-bottom: 1%;
     right: 0;
+    min-width: 50px;
 
 }
 
@@ -105,10 +106,11 @@ body {
     background-color: #4b494a;
     font-size: 1.7em;
     font-family: 'Roboto', monospace, Serif;
+    margin-bottom: 1%;
 }
 
-.btn.btn-link.col.text-left.collapsed {
-    margin-bottom: 1% !important;
+.btn.btn-link.col.text-left.opened {
+    margin-bottom: 0;
 }
 
 
