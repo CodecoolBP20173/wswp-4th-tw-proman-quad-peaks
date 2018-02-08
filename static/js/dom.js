@@ -101,6 +101,7 @@ dom = {
                 {
                     let newCard = document.createElement('div');
                     newCard.innerHTML = cards[i].title;
+                    newCard.setAttribute('order', cards[i].order);
                     columns[j].appendChild(newCard);
                 }
             }
@@ -108,6 +109,21 @@ dom = {
     },
     setSelectedAddButon : function (boardId) {
         this.global.selectedAddButtonBoardId = boardId;
+    },
+
+
+    setCardOrder: function (columns) {
+        // To be called RIGHT AFTER drag-and-dropping a card
+        // Parameter: the 'columns' div of the board, on which the card was moved
+        // Goes through all columns (of one board), and sets the 'order' attribute of ALL cards in each
+        // column to the current order, as they are found in the DOM tree.
+        for (let i = 0; i < columns.length; i++){
+            cardList = columns[i].childNodes;
+            for (let j = 0; j < cardList.length; j++){
+                cardList[j].order = j+1;
+            }
+        }
     }
+
     // here comes more features
 };
