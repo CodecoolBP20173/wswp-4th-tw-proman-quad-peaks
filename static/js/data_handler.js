@@ -69,7 +69,7 @@ dataHandler = {
             "title": cardTitle,
             "board_id": boardId,
             "status_id": statusId,
-            "order": 0
+            "order": this.generateCardOrder()
         },);
         this._saveData();
         callback(this._data.boards);
@@ -101,6 +101,19 @@ dataHandler = {
         }
         return max_id + 1;
     },
+    generateCardOrder: function () {
+        var cards = this._data.cards;
+        max_order = 0;
+        for(let i = 0; i < cards.length; i++){
+            if(cards[i].status_id === 1){
+                if(max_order < cards[i].order){
+                    max_order = cards[i].order;
+                }
+            }
+        }
+        return max_order + 1;
+    },
+
     setActiveStatusForBoard: function (status, boardId) {
         for(let i =0; i < this._data.boards.length; i++)
         {
