@@ -31,7 +31,6 @@ dom = {
             let title = board.title;
             newBoard.innerHTML = title;
             let addCardButton = document.createElement('button');
-            //  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#boardAddModal">
             let buttonRow = document.createElement('div');
             buttonRow.classList.add('row');
             addCardButton.className = "btn btn-primary";
@@ -103,6 +102,7 @@ dom = {
                     let newCard = document.createElement('div');
                     newCard.id = cards[i].id;
                     newCard.innerHTML = cards[i].title;
+                    newCard.setAttribute('order', cards[i].order);
                     columns[j].appendChild(newCard);
                 }
             }
@@ -115,11 +115,25 @@ dom = {
         let card_id = parseInt(el.id);
         let newStatus_id = parseInt(target.id.substring(2,3));
         let newBoard_id = parseInt(target.id.substring(0,1));
-        console.log(card_id);
-        console.log(newBoard_id);
-        console.log(newStatus_id);
-        console.log(target.id);
+        dom.setCardOrder(target);
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
+    },
+
+
+    setCardOrder: function (column) {
+        // To be called RIGHT AFTER drag-and-dropping a card
+        // Parameter: the 'columns' div of the board, on which the card was moved
+        // Goes through all columns (of one board), and sets the 'order' attribute of ALL cards in each
+        // column to the current order, as they are found in the DOM tree.
+        console.log(column);
+        let cardList = column.childNodes;
+        for (let j = 1; j < cardList.length; j++) {
+            console.log(cardList[j]);
+            cardList[j].setAttribute('order', j);
+            var card_id = parseInt(cardList[j].id);
+            dataHandler.setOrderForCard(card_id,j);
+        }
     }
+
     // here comes more features
 };

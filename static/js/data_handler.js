@@ -43,6 +43,7 @@ dataHandler = {
                 cardsByBoardId.push(allCards[i]);
             }
         }
+        dataHandler.putCardsInOrder(cardsByBoardId);
         return cardsByBoardId;
     },
     getCard: function(cardId, callback) {
@@ -68,7 +69,7 @@ dataHandler = {
             "title": cardTitle,
             "board_id": boardId,
             "status_id": statusId,
-            "order": 0
+            "order": this.generateCardOrder()
         },);
         this._saveData();
         callback(this._data.boards);
@@ -100,6 +101,19 @@ dataHandler = {
         }
         return max_id + 1;
     },
+    generateCardOrder: function () {
+        var cards = this._data.cards;
+        max_order = 0;
+        for(let i = 0; i < cards.length; i++){
+            if(cards[i].status_id === 1){
+                if(max_order < cards[i].order){
+                    max_order = cards[i].order;
+                }
+            }
+        }
+        return max_order + 1;
+    },
+
     setActiveStatusForBoard: function (status, boardId) {
         for(let i =0; i < this._data.boards.length; i++)
         {
@@ -116,12 +130,33 @@ dataHandler = {
         {
             if(this._data.cards[i].id == card_id)
             {
-                console.log('saved');
+                console.log('saved status');
                 this._data.cards[i].status_id = status_id;
                 this._data.cards[i].board_id = board_id;
                 break;
             }
         }
         this._saveData();
+    },
+    setOrderForCard:function (card_id, order) {
+        for(let i =0; i < this._data.cards.length; i++)
+        {
+            if(this._data.cards[i].id == card_id)
+            {
+                console.log('saved order');
+                this._data.cards[i].order = order;
+                break;
+            }
+        }
+        this._saveData();
+    },
+    putCardsInOrder: function (cards) {
+        for( let i = 0; i < cards.length; i++){
+            let temp = cards[i];
+            for (var j = i-1; j >= 0 && cards[j].order > temp.order; j--){
+                cards[j+1] = cards[j];
+            }
+            cards[j+1] = temp;
+        }
     }
 };
