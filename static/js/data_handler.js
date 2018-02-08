@@ -130,7 +130,7 @@ dataHandler = {
         {
             if(this._data.cards[i].id == card_id)
             {
-                console.log('saved');
+                console.log('saved status');
                 this._data.cards[i].status_id = status_id;
                 this._data.cards[i].board_id = board_id;
                 break;
@@ -138,7 +138,18 @@ dataHandler = {
         }
         this._saveData();
     },
-
+    setOrderForCard:function (card_id, order) {
+        for(let i =0; i < this._data.cards.length; i++)
+        {
+            if(this._data.cards[i].id == card_id)
+            {
+                console.log('saved order');
+                this._data.cards[i].order = order;
+                break;
+            }
+        }
+        this._saveData();
+    },
     putCardsInOrder: function (cards) {
         for( let i = 0; i < cards.length; i++){
             let temp = cards[i];
