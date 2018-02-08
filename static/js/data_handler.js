@@ -110,5 +110,18 @@ dataHandler = {
             }
         }
         this._saveData();
+    },
+    setStatusIdForCard:function (card_id, status_id, board_id) {
+        for(let i =0; i < this._data.cards.length; i++)
+        {
+            if(this._data.cards[i].id == card_id)
+            {
+                console.log('saved');
+                this._data.cards[i].status_id = status_id;
+                this._data.cards[i].board_id = board_id;
+                break;
+            }
+        }
+        this._saveData();
     }
 };
