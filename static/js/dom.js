@@ -52,7 +52,7 @@ dom = {
             addCardButton.className = "btn btn-primary d-flex justify-content-center";
             addCardButton.setAttribute("data-toggle", "modal");
             addCardButton.setAttribute("data-target", "#cardAddModal");
-            addCardButton.innerHTML = 'Add Card';
+            addCardButton.innerHTML = 'Add New Task';
             addCardButton.addEventListener('click', function () {
                 dom.setSelectedAddButon(board.id);
             });
