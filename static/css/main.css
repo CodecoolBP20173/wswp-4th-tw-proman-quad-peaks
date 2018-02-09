@@ -1,3 +1,236 @@
+
+h1 {
+    font-family: 'Monoton', cursive !important;
+    font-size: 8em !important;
+    margin-left: 9% !important;
+}
+.horse {
+    width: 10%;
+    height: auto;
+    position: absolute;
+    left: -10%;
+    top: 2%;
+    -webkit-animation:linear infinite ;
+    animation: horse_animation 4s infinite;
+    animation-timing-function: linear;
+    animation-fill-mode: backwards;
+
+}
+
+
+footer {
+    position: relative;
+    width: 10%;
+    height: auto;
+    alignment: center;
+    margin: auto;
+}
+footer .logo {
+    width: 100%;
+    height: auto;
+}
+
+
+
+@keyframes horse_animation {
+
+
+    100% { left: 90%;}
+    0% {opacity: 0;}
+    5% {opacity: 0;}
+    10% {opacity: 1;}
+    50% {opacity: 1}
+    65% {opacity: 0}
+    90% {opacity: 0}
+    100% {opacity: 0}
+}
+
+
+img {
+    size: 0.5em;
+}
+#addBoardButton {
+    position: fixed;
+    top:25% !important;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    right: 0;
+    min-width: 50px;
+
+}
+
+body {
+    padding: auto;
+    align-content: center !important ;
+    background-color: #fefdff !important;
+
+}
+
 #boards {
-    background-color: green;
+    margin-top: 5%;
+    margin-bottom: 10px;
+    align-content: center;
+    padding: 0 !important ;
+    max-width: 80% !important;
+    background-color: #fefdff;
+}
+
+.status_header {
+
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.5em;
+    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    padding-bottom: 2%;
+}
+
+.container {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.col > .row > .col {
+    max-width: 25%;
+    border-right: 1px solid black;
+}
+
+.col > .row > .col:nth-child(4n) {
+    border-right: none;
+}
+
+.col.container {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: whitesmoke;
+    background-clip: padding-box;
+
+
+}
+
+.card_container {
+    border: 2px solid black;
+    max-width: 90%;
+    word-break: break-all;
+    background: linear-gradient(135deg, rgba(247,247,247,1) 0%, rgba(227,227,227,1) 64%, rgba(240,240,240,1) 75%, rgba(255,255,255,1) 93%, rgba(255,255,255,1) 99%);
+    color: black;
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all .2s ease-in-out;
+}
+
+
+
+.card_container div {
+    font-size: 1.5em;
+    font-family: 'Cutive Mono', monospace, Serif;
+}
+
+.col > .row > .col > div:hover {
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+    -webkit-transition: 0.5s;
+}
+
+.gu-transit {
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+}
+
+.btn.btn-link {
+    background-color: rgba(119, 112, 112, 0.91) !important;
+    color: white !important;
+    text-decoration: none !important;
+    position: relative;
+    padding: 20px;
+    background-color: #4b494a;
+    font-size: 1.7em;
+    font-family: 'Roboto', monospace, Serif;
+    margin-bottom: 1%;
+}
+
+.btn.btn-link.col.text-left.opened {
+    margin-bottom: 0;
+}
+
+
+.btn.btn-link:hover {
+    background-color: #999590 !important;
+    -webkit-transition-duration: 0.5s !important;
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+}
+
+.btn.btn-primary  {
+    background-color: #ff540e !important;
+    border: 2px solid black;
+}
+
+.btn.btn-primary:hover  {
+    background-color: #ff4c13 !important;
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+}
+
+.col.container.collapse.show {
+    padding-bottom: 0.5%;
+    margin-bottom: 1% !important;
+    transition-duration: 1s !important;
+}
+/*------------------------------------------------------------------*/
+
+:root {
+
+
+  /* Set neon color */
+  --neon-text-color: #f40;
+  --neon-text-color2: black ;
+}
+
+
+
+h1 {
+  font-size: 13rem;
+  font-weight: 200;
+  font-style: italic;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 2rem;
+  animation: flicker 1.5s infinite alternate;
+}
+
+h1::-moz-selection {
+  color: var(--neon-text-color);
+}
+
+h1::selection {
+  color: var(--neon-text-color);
+}
+
+/* Animate neon flicker */
+@keyframes flicker {
+
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+
+        text-shadow:
+            -0.2rem -0.2rem 1rem #fff,
+            0.2rem 0.2rem 1rem #fff,
+            0 0 2rem var(--neon-text-color),
+            0 0 4rem var(--neon-text-color),
+            0 0 6rem var(--neon-text-color),
+            0 0 8rem var(--neon-text-color),
+            0 0 10rem var(--neon-text-color);
+    }
+
+    20%, 24%, 55% {
+        text-shadow: none;
+        box-shadow: none;
+    }
 }
