@@ -4,7 +4,51 @@ h1 {
     font-size: 8em !important;
     margin-left: 9% !important;
 }
+.horse {
+    width: 10%;
+    height: auto;
+    position: absolute;
+    left: -10%;
+    top: 2%;
+    -webkit-animation:linear infinite ;
+    animation: horse_animation 4s infinite;
+    animation-timing-function: linear;
+    animation-fill-mode: backwards;
 
+}
+
+
+footer {
+    position: relative;
+    width: 10%;
+    height: auto;
+    alignment: center;
+    margin: auto;
+}
+footer .logo {
+    width: 100%;
+    height: auto;
+}
+
+
+
+@keyframes horse_animation {
+
+
+    100% { left: 90%;}
+    0% {opacity: 0;}
+    5% {opacity: 0;}
+    10% {opacity: 1;}
+    50% {opacity: 1}
+    65% {opacity: 0}
+    90% {opacity: 0}
+    100% {opacity: 0}
+}
+
+
+img {
+    size: 0.5em;
+}
 #addBoardButton {
     position: fixed;
     top:25% !important;
@@ -28,7 +72,7 @@ body {
     align-content: center;
     padding: 0 !important ;
     max-width: 80% !important;
-    background-color: ghostwhite;
+    background-color: #fefdff;
 }
 
 .status_header {
@@ -65,6 +109,8 @@ body {
     border-bottom: 2px solid black;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    background: whitesmoke;
+    background-clip: padding-box;
 
 
 }
@@ -81,7 +127,10 @@ body {
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
+    transition: all .2s ease-in-out;
 }
+
+
 
 .card_container div {
     font-size: 1.5em;
