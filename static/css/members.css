@@ -1,0 +1,18 @@
+.member-page-main-table-holder{
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+
+.member-page-main-talble{
+    border-collapse: collapse;
+    width: inherit;
+}
+
+.table-holder-members{
+    margin-top: 24px;
+}
+
+.table-holder-user-list{
+    margin-top: 24px;
+}
