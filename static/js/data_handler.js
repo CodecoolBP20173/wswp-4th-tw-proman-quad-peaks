@@ -9,30 +9,29 @@ dataHandler = {
     _loadData: function () {
         // it is not called from outside
         // loads data from local storage, parses it and put into this._data property
-        this._data = JSON.parse(localStorage.getItem(this.keyInLocalStorage))
+        $.ajax({
+            dataType: "text",
+            url: 'get_boards',
+            success: function (response) {
+                dataHandler._data = JSON.parse(response);
+                console.log(dataHandler._data);
+                dom.loadBoards();
+            }
+        });
     },
     _saveData: function () {
         // it is not called from outside
         // saves the data from this._data to local storage
+
         localStorage.setItem(this.keyInLocalStorage, JSON.stringify(this._data));
     },
     init: function () {
         this._loadData();
     },
     getBoards: function (callback = null) {
-        // the boards are retrieved and then the callback function is called with the boards
         callback(this._data.boards);
     },
-    getBoard: function (boardId, callback) {
-        // the board is retrieved and then the callback function is called with the board
-    },
-    getStatuses: function (callback) {
-        // the statuses are retrieved and then the callback function is called with the statuses
-    },
-    getStatus: function (statusId, callback) {
-        // the status is retrieved and then the callback function is called with the status
-    },
-    getCardsByBoardId: function (boardId, callback) {
+    getCardsByBoardId: function (boardId) {
         // the cards are retrieved and then the callback function is called with the cards
         let allCards = this._data.cards;
         let cardsByBoardId = [];
@@ -43,9 +42,6 @@ dataHandler = {
         }
         dataHandler.putCardsInOrder(cardsByBoardId);
         return cardsByBoardId;
-    },
-    getCard: function (cardId, callback) {
-        // the card is retrieved and then the callback function is called with the card
     },
     getStatues: function () {
         return this._data.statuses;
