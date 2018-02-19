@@ -8,6 +8,10 @@ def boards():
     return render_template('boards.html')
 
 
+@app.route("/account")
+def account():
+    return render_template('account.html')
+
 def main():
     app.run(debug=True)
 
