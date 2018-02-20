@@ -1,18 +1,32 @@
 from json import loads
-from flask import Flask, render_template, session, jsonify, request
+from flask import Flask, render_template, session, jsonify, request, redirect
 import queries
+from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = "FJASIDKASÁDASÁKDNAÁSNDÁPIASNDÁPASÁDJSAÓOÓÖÖÓß$äĐ$äđßĐ"
 
 
+def login_required(function):
+    @wraps(function)
+    def wrap(*args, **kwargs):
+        if 'account_id' in session:
+            return function(*args, **kwargs)
+        else:
+            return redirect("/login")
+
+    return wrap
+
+
 @app.route("/")
+@login_required
 def boards():
     ''' this is a one-pager which shows all the boards and cards '''
     return render_template('boards.html')
 
 
 @app.route("/get_boards")
+@login_required
 def get_boards():
     # DELETE THIS
     session['group_id'] = 1
@@ -23,6 +37,7 @@ def get_boards():
 
 
 @app.route("/save_boards", methods=['POST'])
+@login_required
 def save_boards():
     group_id = session['group_id']
     data = loads(request.form['data'])
@@ -33,11 +48,13 @@ def save_boards():
 
 
 @app.route("/account")
+@login_required
 def account():
     return render_template('account.html')
 
 
 @app.route('/members')
+@login_required
 def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
     return render_template('members.html')
 
