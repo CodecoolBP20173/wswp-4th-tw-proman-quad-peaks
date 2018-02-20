@@ -60,6 +60,14 @@ def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this
     return render_template('members.html')
 
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('account_id', None)
+    session.pop('group_id', None)
+    return redirect('/login')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
