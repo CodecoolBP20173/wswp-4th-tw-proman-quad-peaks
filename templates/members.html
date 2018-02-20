@@ -23,9 +23,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
             defer></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' defer></script>
-    <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/members.js') }}" defer></script>
 </head>
 <body>
 <h1>ProMan</h1>
@@ -42,13 +40,13 @@
                     </h2>
                     <div class="table-holder-members">
                         <table class="table-members">
-                            {% for i in range(6) %}
+                            {% for member in members %}
                                 <tr>
                                     <td>
-                                        Member name
+                                        {{ member.username }}
                                     </td>
                                     <td>
-                                        <button class="button-kick-member">
+                                        <button id="{{ member.id }}" class="button-kick-member">
                                             Ki vagy rúgva
                                         </button>
                                     </td>
