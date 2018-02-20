@@ -26,7 +26,6 @@ def get_boards():
 def save_boards():
     group_id = session['group_id']
     data = loads(request.form['data'])
-    print(data)
     boards = data['boards']
     cards = data['cards']
     queries.save_data(group_id, cards, boards)

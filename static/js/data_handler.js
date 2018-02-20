@@ -22,8 +22,29 @@ dataHandler = {
     _saveData: function () {
         // it is not called from outside
         // saves the data from this._data to local storage
+        $.ajax({
+            dataType: "text",
+            url: 'save_boards',
+            data: {
+                'data': JSON.stringify(dataHandler._data)
+            },
+            cache: false,
+            type: "POST",
+            success: function (response) {
+                if (response === 'OK')
+                {
+                    console.log('data saved')
+                }
+                else{
+                    alert('could not save data');
+                }
 
-        localStorage.setItem(this.keyInLocalStorage, JSON.stringify(this._data));
+            },
+            error: function (xhr) {
+                alert('could not save data');
+            }
+        });
+        //localStorage.setItem(this.keyInLocalStorage, JSON.stringify(this._data));
     },
     init: function () {
         this._loadData();
