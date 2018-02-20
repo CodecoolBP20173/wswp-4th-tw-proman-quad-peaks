@@ -18,7 +18,9 @@ function kickButtonListener() {
                     alert('something went wrong');
                 }
             });
-        })
+            $(this).parent().parent().remove();
+        }
+        )
     }
 }
 kickButtonListener();

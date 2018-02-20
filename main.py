@@ -15,7 +15,7 @@ def boards():
 @app.route("/get_boards")
 def get_boards():
     # DELETE THIS
-    session['group_id'] = 2
+    session['group_id'] = 3
 
     group_id = session['group_id']
     data = queries.get_data(group_id)
@@ -48,13 +48,13 @@ def show_login_page_for_testing_purposes_definitely_rename_and_or_rewrite_this()
     return render_template('login.html')
 
 
-
-@app.route('/delete_user')
+@app.route('/delete_user', methods=['post'])
 def delete_members():
-    group_id = session['group_id']
-    account_id = request.form['id']
+    group_id = '3' #session['group_id']
+    account_id = '4' #request.form['id']
+    queries.delete_member(group_id, account_id)
 
-    return 'ok'
+    return "OK"
 
 
 def main():

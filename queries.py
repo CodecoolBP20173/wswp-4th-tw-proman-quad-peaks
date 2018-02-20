@@ -73,7 +73,7 @@ def search_user(search_pattern):
 
 
 def delete_member(group_id, account_id):
-    return data_manager.execute_select("""
+    return data_manager.execute_dml_statement("""
                                         DELETE FROM account_groups
                                         WHERE account_id = %(account_id)s AND group_id = %(group_id)s;
                                         """,
