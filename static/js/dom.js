@@ -58,7 +58,7 @@ dom = {
             });
             buttonRow.appendChild(addCardButton);
             newBoard.className = "btn btn-link col text-left";
-            if(board.is_active === 'true')
+            if(board.is_active)
             {
                 newBoard.classList.add("opened");
             }
@@ -106,7 +106,7 @@ dom = {
             }
 
             newBoardContent.className = 'col container collapse';
-            if(board.is_active === 'true')
+            if(board.is_active)
             {
                 newBoardContent.classList.add('show')
             }
