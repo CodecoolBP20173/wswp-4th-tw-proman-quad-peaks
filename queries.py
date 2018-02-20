@@ -53,3 +53,17 @@ def is_in_current_data(current_data, id):
         if data['id'] == int(id):
             return True
     return False
+
+
+def get_user_by_name(name):
+    return data_manager.execute_select(
+        """SELECT * FROM accounts WHERE username=%(name)s;""",
+        {'name': name})
+
+
+def add_user_account(name, password):
+    response = data_manager.execute_dml_statement(
+        """INSERT INTO accounts (username, password) VALUES (%(name)s, %(pass)s)""",
+        {'name': name, 'pass': password}
+    )
+    return response

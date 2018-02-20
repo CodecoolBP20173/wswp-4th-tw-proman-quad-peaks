@@ -1,18 +1,34 @@
 from json import loads
-from flask import Flask, render_template, session, jsonify, request
+from flask import Flask, render_template, session, jsonify, request, redirect
+import bcrypt
 import queries
+import validate
+from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = "FJASIDKASÁDASÁKDNAÁSNDÁPIASNDÁPASÁDJSAÓOÓÖÖÓß$äĐ$äđßĐ"
 
 
+def login_required(function):
+    @wraps(function)
+    def wrap(*args, **kwargs):
+        if 'account_id' in session:
+            return function(*args, **kwargs)
+        else:
+            return redirect("/login")
+
+    return wrap
+
+
 @app.route("/")
+@login_required
 def boards():
     ''' this is a one-pager which shows all the boards and cards '''
     return render_template('boards.html')
 
 
 @app.route("/get_boards")
+@login_required
 def get_boards():
     # DELETE THIS
     session['group_id'] = 1
@@ -23,6 +39,7 @@ def get_boards():
 
 
 @app.route("/save_boards", methods=['POST'])
+@login_required
 def save_boards():
     group_id = session['group_id']
     data = loads(request.form['data'])
@@ -33,18 +50,75 @@ def save_boards():
 
 
 @app.route("/account")
+@login_required
 def account():
     return render_template('account.html')
 
 
 @app.route('/members')
+@login_required
 def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
     return render_template('members.html')
 
 
-@app.route('/login')
-def show_login_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
-    return render_template('login.html')
+@app.route('/logout')
+@login_required
+def logout():
+    session.pop('username', None)
+    session.pop('account_id', None)
+    session.pop('group_id', None)
+    return redirect('/login')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html', form_type="")
+    else:
+        if 'button' in request.form:
+            return render_template('login.html',
+                                   form_type=request.form['button'],
+                                   default_username="")
+        else:
+            message = validate.validate_request(request.form)
+            if message != "":
+                return render_template('login.html',
+                                           form_type="",
+                                           specmessage=message)
+            else:
+                if request.form['task'] == "login":
+                    userdata = queries.get_user_by_name(request.form['username'])
+                    password_hash = userdata[0]['password']
+                    if bcrypt.checkpw(request.form['password'].encode('utf-8'), password_hash.encode('utf-8')):
+                        session['account_id'] = userdata[0]['id']
+                        session['username'] = userdata[0]['username']
+                        return redirect('/account')
+                    else:
+                        message = "Wrong username or password"
+                        return render_template('login.html',
+                                               form_type='login',
+                                               default_username=request.form['username'],
+                                               message=message)
+                else:
+                    userdata = queries.get_user_by_name(request.form['username'])
+                    if len(userdata) == 0:
+                        message = validate.validate_password(request.form['password'])
+                        if message != "":
+                            return render_template('login.html',
+                                               form_type='register',
+                                               default_username=request.form['username'],
+                                               message=message)
+                        else:
+                            password_hash = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+                            queries.add_user_account(request.form['username'], password_hash)
+                            return redirect('/login')
+                    else:
+                        message = "Username already taken."
+                        return render_template('login.html',
+                                               form_type='register',
+                                               default_username=request.form['username'],
+                                               message=message)
+
 
 
 def main():
