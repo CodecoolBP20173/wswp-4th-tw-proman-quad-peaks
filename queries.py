@@ -67,3 +67,17 @@ def add_group(account_id, title):
     data_manager.execute_dml_statement(
         """INSERT INTO account_groups (account_id, group_id) VALUES (%(account_id)s,%(group_id)s)""",
         {'account_id': account_id, 'group_id': group_id})
+
+
+def get_user_by_name(name):
+    return data_manager.execute_select(
+        """SELECT * FROM accounts WHERE username=%(name)s;""",
+        {'name': name})
+
+
+def add_user_account(name, password):
+    response = data_manager.execute_dml_statement(
+        """INSERT INTO accounts (username, password) VALUES (%(name)s, %(pass)s)""",
+        {'name': name, 'pass': password}
+    )
+    return response
