@@ -46,6 +46,11 @@
             </div>
         </form>
     </div>
+    {% if specmessage %}
+        <div class="spec-error-message-holder">
+            {{ specmessage }}
+        </div>
+    {% endif %}
 
 {% else %}
     <div class="login-form-holder">
