@@ -1,22 +1,8 @@
-
 h1 {
     font-family: 'Monoton', cursive !important;
     font-size: 8em !important;
     margin-left: 9% !important;
 }
-.horse {
-    width: 10%;
-    height: auto;
-    position: absolute;
-    left: -10%;
-    top: 2%;
-    -webkit-animation:linear infinite ;
-    animation: horse_animation 4s infinite;
-    animation-timing-function: linear;
-    animation-fill-mode: backwards;
-
-}
-
 
 footer {
     position: relative;
@@ -25,33 +11,19 @@ footer {
     alignment: center;
     margin: auto;
 }
+
 footer .logo {
     width: 100%;
     height: auto;
 }
 
-
-
-@keyframes horse_animation {
-
-
-    100% { left: 90%;}
-    0% {opacity: 0;}
-    5% {opacity: 0;}
-    10% {opacity: 1;}
-    50% {opacity: 1}
-    65% {opacity: 0}
-    90% {opacity: 0}
-    100% {opacity: 0}
-}
-
-
 img {
     size: 0.5em;
 }
+
 #addBoardButton {
     position: fixed;
-    top:25% !important;
+    top: 25% !important;
     padding-top: 1%;
     padding-bottom: 1%;
     right: 0;
@@ -61,7 +33,7 @@ img {
 
 body {
     padding: auto;
-    align-content: center !important ;
+    align-content: center !important;
 
     background: linear-gradient(7deg, #244366, #664724);
     background-size: 400% 400%;
@@ -71,35 +43,13 @@ body {
     animation: AnimationName 32s ease infinite;
 }
 
-@-webkit-keyframes AnimationName {
-    0%{background-position:99% 0%}
-    50%{background-position:2% 100%}
-    100%{background-position:99% 0%}
-}
-@-moz-keyframes AnimationName {
-    0%{background-position:99% 0%}
-    50%{background-position:2% 100%}
-    100%{background-position:99% 0%}
-}
-@keyframes AnimationName {
-    0%{background-position:99% 0%}
-    50%{background-position:2% 100%}
-    100%{background-position:99% 0%}
-}
-
-
-
-
 #boards {
     margin-top: 5%;
     margin-bottom: 10px;
     align-content: center;
-    padding: 0 !important ;
+    padding: 0 !important;
     max-width: 80% !important;
-    background: transparent;
-    -webkit-animation: AnimationName 32s ease infinite;
-    -moz-animation: AnimationName 32s ease infinite;
-    animation: AnimationName 32s ease infinite;
+
 }
 
 .status_header {
@@ -114,11 +64,12 @@ body {
 .container {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome and Opera */
 }
 
 .col > .row > .col {
@@ -139,25 +90,7 @@ body {
     background: whitesmoke;
     background-clip: padding-box;
 
-
 }
-
-.card_container {
-    border: 2px solid black;
-    max-width: 90%;
-    word-break: break-all;
-    background: linear-gradient(135deg, rgba(247,247,247,1) 0%, rgba(227,227,227,1) 64%, rgba(240,240,240,1) 75%, rgba(255,255,255,1) 93%, rgba(255,255,255,1) 99%);
-    color: black;
-    margin: 10px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all .2s ease-in-out;
-}
-
-
 
 .card_container div {
     font-size: 1.5em;
@@ -165,12 +98,12 @@ body {
 }
 
 .col > .row > .col > div:hover {
-    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 15) !important;
     -webkit-transition: 0.5s;
 }
 
 .gu-transit {
-    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 15) !important;
 }
 
 .btn.btn-link {
@@ -189,21 +122,20 @@ body {
     margin-bottom: 0;
 }
 
-
 .btn.btn-link:hover {
     background-color: #999590 !important;
     -webkit-transition-duration: 0.5s !important;
-    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 15) !important;
 }
 
-.btn.btn-primary  {
+.btn.btn-primary {
     background-color: #ff540e !important;
     border: 2px solid black;
 }
 
-.btn.btn-primary:hover  {
+.btn.btn-primary:hover {
     background-color: #ff4c13 !important;
-    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 15) !important;
 }
 
 .col.container.collapse.show {
@@ -211,34 +143,32 @@ body {
     margin-bottom: 1% !important;
     transition-duration: 1s !important;
 }
+
 /*------------------------------------------------------------------*/
 
 :root {
 
-
-  /* Set neon color */
-  --neon-text-color: #f40;
-  --neon-text-color2: black ;
+    /* Set neon color */
+    --neon-text-color: #f40;
+    --neon-text-color2: black;
 }
 
-
-
 h1 {
-  font-size: 13rem;
-  font-weight: 200;
-  font-style: italic;
-  color: #fff;
-  padding: 2rem;
-  border-radius: 2rem;
-  animation: flicker 1.5s infinite alternate;
+    font-size: 13rem;
+    font-weight: 200;
+    font-style: italic;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 2rem;
+    animation: flicker 1.5s infinite alternate;
 }
 
 h1::-moz-selection {
-  color: var(--neon-text-color);
+    color: var(--neon-text-color);
 }
 
 h1::selection {
-  color: var(--neon-text-color);
+    color: var(--neon-text-color);
 }
 
 /* Animate neon flicker */
