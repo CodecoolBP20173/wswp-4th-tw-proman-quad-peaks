@@ -8,10 +8,6 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = "FJASIDKASÁDASÁKDNAÁSNDÁPIASNDÁPASÁDJSAÓOÓÖÖÓß$äĐ$äđßĐ"
 
-
-@app.route("/<int:group_id>")
-def boards(group_id):
-    session['group_id'] = group_id
 def login_required(function):
     @wraps(function)
     def wrap(*args, **kwargs):
@@ -22,12 +18,12 @@ def login_required(function):
 
     return wrap
 
-
-@app.route("/")
+@app.route("/<int:group_id>")
 @login_required
-def boards():
-    ''' this is a one-pager which shows all the boards and cards '''
+def boards(group_id):
+    session['group_id'] = group_id
     return render_template('boards.html')
+
 
 
 @app.route("/get_boards")
@@ -51,6 +47,7 @@ def save_boards():
 
 
 @app.route("/account")
+@app.route("/")
 @login_required
 def account():
     return render_template('account.html')
@@ -58,9 +55,6 @@ def account():
 
 @app.route("/get_groups")
 def get_groups():
-    # DELETE THIS
-    session['account_id'] = 1
-
     account_id = session['account_id']
     groups = queries.get_groups(account_id)
     return jsonify(groups)
