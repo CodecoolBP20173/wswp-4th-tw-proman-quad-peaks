@@ -62,6 +62,7 @@ def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this
 
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('username', None)
     session.pop('account_id', None)
@@ -79,38 +80,44 @@ def login():
                                    form_type=request.form['button'],
                                    default_username="")
         else:
-            if request.form['task'] == "login":
-                userdata = queries.get_user_by_name(request.form['username'])
-                password_hash = userdata[0]['password']
-                if bcrypt.checkpw(request.form['password'].encode('utf-8'), password_hash.encode('utf-8')):
-                    session['account_id'] = userdata[0]['id']
-                    session['username'] = userdata[0]['username']
-                    return redirect('/account')
-                else:
-                    message = "Wrong username or password"
-                    return render_template('login.html',
-                                           form_type='login',
-                                           default_username=request.form['username'],
-                                           message=message)
+            message = validate.validate_request(request.form)
+            if message != "":
+                return render_template('login.html',
+                                           form_type="",
+                                           specmessage=message)
             else:
-                userdata = queries.get_user_by_name(request.form['username'])
-                if len(userdata) == 0:
-                    message = validate.validate_password(request.form['password'])
-                    if message != "":
-                        return render_template('login.html',
-                                           form_type='register',
-                                           default_username=request.form['username'],
-                                           message=message)
+                if request.form['task'] == "login":
+                    userdata = queries.get_user_by_name(request.form['username'])
+                    password_hash = userdata[0]['password']
+                    if bcrypt.checkpw(request.form['password'].encode('utf-8'), password_hash.encode('utf-8')):
+                        session['account_id'] = userdata[0]['id']
+                        session['username'] = userdata[0]['username']
+                        return redirect('/account')
                     else:
-                        password_hash = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-                        queries.add_user_account(request.form['username'], password_hash)
-                        return redirect('/login')
+                        message = "Wrong username or password"
+                        return render_template('login.html',
+                                               form_type='login',
+                                               default_username=request.form['username'],
+                                               message=message)
                 else:
-                    message = "Username already taken."
-                    return render_template('login.html',
-                                           form_type='register',
-                                           default_username=request.form['username'],
-                                           message=message)
+                    userdata = queries.get_user_by_name(request.form['username'])
+                    if len(userdata) == 0:
+                        message = validate.validate_password(request.form['password'])
+                        if message != "":
+                            return render_template('login.html',
+                                               form_type='register',
+                                               default_username=request.form['username'],
+                                               message=message)
+                        else:
+                            password_hash = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+                            queries.add_user_account(request.form['username'], password_hash)
+                            return redirect('/login')
+                    else:
+                        message = "Username already taken."
+                        return render_template('login.html',
+                                               form_type='register',
+                                               default_username=request.form['username'],
+                                               message=message)
 
 
 
