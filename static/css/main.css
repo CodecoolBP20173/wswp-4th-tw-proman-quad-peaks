@@ -1,8 +1,16 @@
-
+html {
+    height: 100%;
+}
 h1 {
     font-family: 'Monoton', cursive !important;
-    font-size: 8em !important;
+
     margin-left: 9% !important;
+    color: #ff540e !important;
+    font-size: 8em !important;
+    font-weight: 200 !important;
+    font-style: italic !important;
+    padding: 2rem !important;
+    border-radius: 2rem !important;
 }
 .horse {
     width: 10%;
@@ -64,14 +72,38 @@ body {
     align-content: center !important ;
 
     background: linear-gradient(7deg, #244366, #664724);
-
-
+    background-size: 400% 400%;
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     -webkit-animation: AnimationName 5s ease infinite;
     -moz-animation: AnimationName 5s ease infinite;
     animation: AnimationName 5s ease infinite;
 }
 
 
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:33% 0%}
+    50%{background-position:68% 100%}
+    100%{background-position:33% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:33% 0%}
+    50%{background-position:68% 100%}
+    100%{background-position:33% 0%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:33% 0%}
+    50%{background-position:68% 100%}
+    100%{background-position:33% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:33% 0%}
+    50%{background-position:68% 100%}
+    100%{background-position:33% 0%}
+}
 
 
 #boards {
@@ -197,32 +229,10 @@ body {
 }
 /*------------------------------------------------------------------*/
 
-:root {
-
-
-  /* Set neon color */
-  --neon-text-color: #f40;
-  --neon-text-color2: black ;
-}
 
 
 
-h1 {
-  font-size: 13rem;
-  font-weight: 200;
-  font-style: italic;
-  color: #fff;
-  padding: 2rem;
-  border-radius: 2rem;
-  animation: flicker 1.5s infinite alternate;
-}
 
-h1::-moz-selection {
-  color: var(--neon-text-color);
-}
 
-h1::selection {
-  color: var(--neon-text-color);
-}
 
-/* Animate neon flicker */
+
