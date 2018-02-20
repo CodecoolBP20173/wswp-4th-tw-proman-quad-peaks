@@ -57,6 +57,6 @@ def is_in_current_data(current_data, id):
 
 def search_user(search_pattern):
     return data_manager.execute_select(
-        """SELECT * FROM accounts WHERE LOWER(username) LIKE LOWER(%(pattern)s)""",
+        """SELECT id, username FROM accounts WHERE LOWER(username) LIKE LOWER(%(pattern)s)""",
         {'pattern': '%' + search_pattern + '%'}
     )
