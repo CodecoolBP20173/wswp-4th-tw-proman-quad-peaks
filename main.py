@@ -59,9 +59,19 @@ def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this
     return render_template('members.html')
 
 
-@app.route('/login')
-def show_login_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
-    return render_template('login.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html', form_type="")
+    else:
+        if 'button' in request.form:
+            return render_template('login.html', form_type=request.form['button'])
+        else:
+            if request.form['task'] == "login":
+                return "login"
+            else:
+                return "register"
+
 
 
 def main():
