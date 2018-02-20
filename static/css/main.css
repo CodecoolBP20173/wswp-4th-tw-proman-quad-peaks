@@ -49,7 +49,7 @@ footer .logo {
 img {
     size: 0.5em;
 }
-#addBoardButton {
+#addBoardButton, #addGroupButton {
     position: fixed;
     top:25% !important;
     padding-top: 1%;

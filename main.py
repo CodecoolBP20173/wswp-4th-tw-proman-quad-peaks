@@ -6,19 +6,17 @@ app = Flask(__name__)
 app.secret_key = "FJASIDKASÁDASÁKDNAÁSNDÁPIASNDÁPASÁDJSAÓOÓÖÖÓß$äĐ$äđßĐ"
 
 
-@app.route("/")
-def boards():
-    ''' this is a one-pager which shows all the boards and cards '''
+@app.route("/<int:group_id>")
+def boards(group_id):
+    session['group_id'] = group_id
     return render_template('boards.html')
 
 
 @app.route("/get_boards")
 def get_boards():
-    # DELETE THIS
-    session['group_id'] = 1
-
     group_id = session['group_id']
     data = queries.get_data(group_id)
+    print(data)
     return jsonify(data)
 
 
@@ -45,6 +43,14 @@ def get_groups():
     account_id = session['account_id']
     groups = queries.get_groups(account_id)
     return jsonify(groups)
+
+
+@app.route("/add_group", methods=['POST'])
+def add_group():
+    group_title = request.form['title']
+    account_id = session['account_id']
+    queries.add_group(account_id, group_title)
+    return "OK"
 
 
 @app.route('/members')

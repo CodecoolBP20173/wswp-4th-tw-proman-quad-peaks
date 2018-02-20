@@ -59,3 +59,11 @@ def get_groups(account_id):
     groups = data_manager.execute_select("""SELECT groups.id as group_id, name FROM groups JOIN account_groups a on groups.id = a.group_id
                                             WHERE a.account_id = %(account_id)s""", {'account_id': account_id})
     return groups
+
+
+def add_group(account_id, title):
+    group_id = data_manager.execute_dml_statement("""INSERT INTO groups (name) VALUES (%(title)s) RETURNING id""",
+                                                  {'title': title})
+    data_manager.execute_dml_statement(
+        """INSERT INTO account_groups (account_id, group_id) VALUES (%(account_id)s,%(group_id)s)""",
+        {'account_id': account_id, 'group_id': group_id})
