@@ -32,20 +32,20 @@
 <img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">
 
 {% if form_type == "" %}
-<div class="login-registration-main-holder">
-    <form action="/login" method="post" id="login-choice-form">
-        <div class="login-button-holder">
-            <button class="login-button" name="button" value="login" type="submit" form="login-choice-form">
-                Log in
-            </button>
-        </div>
-        <div class="register-button-holder">
-            <button class="register-button" name="button" value="register" type="submit" form="login-choice-form">
-                Register
-            </button>
-        </div>
-    </form>
-</div>
+    <div class="login-registration-main-holder">
+        <form action="/login" method="post" id="login-choice-form">
+            <div class="login-button-holder">
+                <button class="login-button" name="button" value="login" type="submit" form="login-choice-form">
+                    Log in
+                </button>
+            </div>
+            <div class="register-button-holder">
+                <button class="register-button" name="button" value="register" type="submit" form="login-choice-form">
+                    Register
+                </button>
+            </div>
+        </form>
+    </div>
 
 {% else %}
     <div class="login-form-holder">
@@ -57,7 +57,7 @@
                 <label for="user-name">
                     User name
                 </label>
-                <input type="text" id="user-name" name="username" required>
+                <input type="text" id="user-name" name="username" required value="{{ default_username }}">
             </div>
             <div class="login-form-password-holder">
                 <label for="password">
@@ -65,6 +65,11 @@
                 </label>
                 <input type="password" id="password" name="password" required>
             </div>
+            {% if message != "" %}
+                <div class="login-form-error-message-holder">
+                    {{ message }}
+                </div>
+            {% endif %}
             <div class="login-form-submit-button-holder">
                 <button form="login-form" type="submit" name="task" value="{{ form_type }}">
                     {% if form_type == 'login' %}
