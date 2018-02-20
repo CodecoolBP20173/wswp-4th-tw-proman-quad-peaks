@@ -37,6 +37,16 @@ def account():
     return render_template('account.html')
 
 
+@app.route("/get_groups")
+def get_groups():
+    # DELETE THIS
+    session['account_id'] = 1
+
+    account_id = session['account_id']
+    groups = queries.get_groups(account_id)
+    return jsonify(groups)
+
+
 @app.route('/members')
 def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
     return render_template('members.html')

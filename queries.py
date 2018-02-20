@@ -53,3 +53,9 @@ def is_in_current_data(current_data, id):
         if data['id'] == int(id):
             return True
     return False
+
+
+def get_groups(account_id):
+    groups = data_manager.execute_select("""SELECT groups.id as group_id, name FROM groups JOIN account_groups a on groups.id = a.group_id
+                                            WHERE a.account_id = %(account_id)s""", {'account_id': account_id})
+    return groups
