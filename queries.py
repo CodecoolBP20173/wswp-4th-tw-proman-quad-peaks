@@ -63,3 +63,19 @@ def get_members(group_id):
                                 JOIN groups ON a.group_id = groups.id
                                 WHERE groups.id = %(group_id)s;''',
                                 {'group_id': group_id})
+
+
+def search_user(search_pattern):
+    return data_manager.execute_select(
+        """SELECT id, username FROM accounts WHERE LOWER(username) LIKE LOWER(%(pattern)s)""",
+        {'pattern': '%' + search_pattern + '%'}
+    )
+
+
+def delete_member(group_id, account_id):
+    return data_manager.execute_select("""
+                                        DELETE FROM account_groups
+                                        WHERE account_id = %(account_id)s AND group_id = %(group_id)s;
+                                        """,
+                                       {'account_id': account_id, 'group_id': group_id})
+
