@@ -2,6 +2,7 @@ from json import loads
 from flask import Flask, render_template, session, jsonify, request, redirect
 import bcrypt
 import queries
+import validate
 from functools import wraps
 
 app = Flask(__name__)
@@ -94,9 +95,16 @@ def login():
             else:
                 userdata = queries.get_user_by_name(request.form['username'])
                 if len(userdata) == 0:
-                    password_hash = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-                    queries.add_user_account(request.form['username'], password_hash)
-                    return redirect('/login')
+                    message = validate.validate_password(request.form['password'])
+                    if message != "":
+                        return render_template('login.html',
+                                           form_type='register',
+                                           default_username=request.form['username'],
+                                           message=message)
+                    else:
+                        password_hash = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+                        queries.add_user_account(request.form['username'], password_hash)
+                        return redirect('/login')
                 else:
                     message = "Username already taken."
                     return render_template('login.html',
