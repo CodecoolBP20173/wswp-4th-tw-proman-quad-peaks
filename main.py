@@ -77,7 +77,8 @@ def remove_group():
 @app.route('/members')
 @login_required
 def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
-    return render_template('members.html')
+    members = queries.get_members(session['group_id'])
+    return render_template('members.html', members=members)
 
 
 @app.route('/logout')
@@ -107,6 +108,12 @@ def login():
             else:
                 if request.form['task'] == "login":
                     userdata = queries.get_user_by_name(request.form['username'])
+                    if not userdata:
+                        message = "Wrong username or password"
+                        return render_template('login.html',
+                                               form_type='login',
+                                               default_username=request.form['username'],
+                                               message=message)
                     password_hash = userdata[0]['password']
                     if bcrypt.checkpw(request.form['password'].encode('utf-8'), password_hash.encode('utf-8')):
                         session['account_id'] = userdata[0]['id']
@@ -138,6 +145,15 @@ def login():
                                                default_username=request.form['username'],
                                                message=message)
 
+
+
+@app.route('/delete_user', methods=['post'])
+def delete_members():
+    group_id = '3' #session['group_id']
+    account_id = '4' #request.form['id']
+    queries.delete_member(group_id, account_id)
+
+    return "OK"
 
 
 def main():
