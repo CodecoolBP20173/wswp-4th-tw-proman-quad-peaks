@@ -296,7 +296,7 @@ COPY account_groups (id, account_id, group_id) FROM stdin;
 -- Name: account_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: andris
 --
 
-SELECT pg_catalog.setval('account_groups_id_seq', 1, false);
+SELECT pg_catalog.setval('account_groups_id_seq', 13, true);
 
 
 --
@@ -304,6 +304,7 @@ SELECT pg_catalog.setval('account_groups_id_seq', 1, false);
 --
 
 COPY accounts (id, username, password) FROM stdin;
+2	andris	$2b$12$jYPtNrKz1dmHidpSu/GCyuaIQ2F.C4bBUebG9a5cy6xOhoClllfHy
 \.
 
 
@@ -311,7 +312,7 @@ COPY accounts (id, username, password) FROM stdin;
 -- Name: accounts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: andris
 --
 
-SELECT pg_catalog.setval('accounts_id_seq', 1, false);
+SELECT pg_catalog.setval('accounts_id_seq', 2, true);
 
 
 --
@@ -326,7 +327,7 @@ COPY boards (id, title, is_active, group_id) FROM stdin;
 -- Name: boards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: andris
 --
 
-SELECT pg_catalog.setval('boards_id_seq', 1, false);
+SELECT pg_catalog.setval('boards_id_seq', 39, true);
 
 
 --
@@ -341,7 +342,7 @@ COPY cards (id, title, board_id, status_id, "order") FROM stdin;
 -- Name: cards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: andris
 --
 
-SELECT pg_catalog.setval('cards_id_seq', 1, false);
+SELECT pg_catalog.setval('cards_id_seq', 29, true);
 
 
 --
@@ -356,7 +357,7 @@ COPY groups (id, name) FROM stdin;
 -- Name: groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: andris
 --
 
-SELECT pg_catalog.setval('groups_id_seq', 1, false);
+SELECT pg_catalog.setval('groups_id_seq', 13, true);
 
 
 --
@@ -364,6 +365,10 @@ SELECT pg_catalog.setval('groups_id_seq', 1, false);
 --
 
 COPY statuses (id, name) FROM stdin;
+1	New
+2	In progress
+3	Testing
+4	Done
 \.
 
 
@@ -420,7 +425,7 @@ ALTER TABLE ONLY statuses
 --
 
 ALTER TABLE ONLY account_groups
-    ADD CONSTRAINT account_groups_accounts_id_fk FOREIGN KEY (account_id) REFERENCES accounts(id);
+    ADD CONSTRAINT account_groups_accounts_id_fk FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE;
 
 
 --
@@ -428,7 +433,7 @@ ALTER TABLE ONLY account_groups
 --
 
 ALTER TABLE ONLY account_groups
-    ADD CONSTRAINT account_groups_groups_id_fk FOREIGN KEY (group_id) REFERENCES groups(id);
+    ADD CONSTRAINT account_groups_groups_id_fk FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE CASCADE;
 
 
 --
@@ -436,7 +441,7 @@ ALTER TABLE ONLY account_groups
 --
 
 ALTER TABLE ONLY boards
-    ADD CONSTRAINT boards_groups_id_fk FOREIGN KEY (group_id) REFERENCES groups(id);
+    ADD CONSTRAINT boards_groups_id_fk FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE CASCADE;
 
 
 --
@@ -444,7 +449,7 @@ ALTER TABLE ONLY boards
 --
 
 ALTER TABLE ONLY cards
-    ADD CONSTRAINT cards_boards_id_fk FOREIGN KEY (board_id) REFERENCES boards(id);
+    ADD CONSTRAINT cards_boards_id_fk FOREIGN KEY (board_id) REFERENCES boards(id) ON DELETE CASCADE;
 
 
 --

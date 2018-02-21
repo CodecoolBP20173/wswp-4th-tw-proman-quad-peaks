@@ -31,11 +31,10 @@ dataHandler = {
             cache: false,
             type: "POST",
             success: function (response) {
-                if (response === 'OK')
-                {
+                if (response === 'OK') {
                     console.log('data saved')
                 }
-                else{
+                else {
                     alert('could not save data');
                 }
 
@@ -70,47 +69,25 @@ dataHandler = {
     createNewBoard: function (boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
         this._data.boards.unshift({
-            "id": this.generateBoardId(),
+            "id": -1,
             "title": boardTitle,
             "is_active": 'true'
         });
         this._saveData();
-        this.getBoards(callback);
+        this._loadData();
+        //this.getBoards(callback);
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
         this._data.cards.push({
-            "id": this.generateCardId(),
+            "id": -1,
             "title": cardTitle,
             "board_id": boardId,
             "status_id": statusId,
             "order": this.generateCardOrder()
         },);
         this._saveData();
-        callback(this._data.boards);
-    },
-    // here comes more features
-    generateBoardId: function () {
-        var boards = this._data.boards;
-        max_id = 0;
-        for (let i = 0; i < boards.length; i++) {
-            let currentId = parseInt(boards[i].id);
-            if (currentId > max_id) {
-                max_id = currentId;
-            }
-        }
-        return max_id + 1;
-    },
-    generateCardId: function () {
-        var cards = this._data.cards;
-        max_id = 0;
-        for (let i = 0; i < cards.length; i++) {
-            let currentId = parseInt(cards[i].id);
-            if (currentId > max_id) {
-                max_id = currentId;
-            }
-        }
-        return max_id + 1;
+        this._loadData();
     },
     generateCardOrder: function () {
         var cards = this._data.cards;
@@ -124,7 +101,29 @@ dataHandler = {
         }
         return max_order + 1;
     },
-
+    removeBoard: function (board_id) {
+        $.ajax({
+            dataType: "text",
+            url: 'remove_board',
+            data: {
+                'board_id': board_id
+            },
+            cache: false,
+            type: "POST",
+            success: function (response) {
+                if (response === 'OK') {
+                    console.log('board deleted');
+                    dataHandler._loadData();
+                }
+                else {
+                    alert('could not save data');
+                }
+            },
+            error: function (xhr) {
+                alert('could not save data');
+            }
+        });
+    },
     setActiveStatusForBoard: function (status, boardId) {
         for (let i = 0; i < this._data.boards.length; i++) {
             if (this._data.boards[i].id == boardId) {

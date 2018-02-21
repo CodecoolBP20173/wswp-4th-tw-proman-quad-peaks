@@ -8,7 +8,6 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = "FJASIDKASÁDASÁKDNAÁSNDÁPIASNDÁPASÁDJSAÓOÓÖÖÓß$äĐ$äđßĐ"
 
-
 def login_required(function):
     @wraps(function)
     def wrap(*args, **kwargs):
@@ -19,20 +18,17 @@ def login_required(function):
 
     return wrap
 
-
-@app.route("/")
+@app.route("/<int:group_id>")
 @login_required
-def boards():
-    ''' this is a one-pager which shows all the boards and cards '''
+def boards(group_id):
+    session['group_id'] = group_id
     return render_template('boards.html')
+
 
 
 @app.route("/get_boards")
 @login_required
 def get_boards():
-    # DELETE THIS
-    session['group_id'] = 3
-
     group_id = session['group_id']
     data = queries.get_data(group_id)
     return jsonify(data)
@@ -50,10 +46,37 @@ def save_boards():
 
 
 @app.route("/account")
+@app.route("/")
 @login_required
 def account():
     return render_template('account.html')
 
+
+@app.route("/get_groups")
+def get_groups():
+    account_id = session['account_id']
+    groups = queries.get_groups(account_id)
+    return jsonify(groups)
+
+
+@app.route("/add_group", methods=['POST'])
+def add_group():
+    group_title = request.form['title']
+    account_id = session['account_id']
+    queries.add_group(account_id, group_title)
+    return "OK"
+
+@app.route("/remove_group", methods=['POST'])
+def remove_group():
+    group_id = request.form['group_id']
+    queries.remove_group(group_id);
+    return "OK"
+
+@app.route("/remove_board", methods=['POST'])
+def remove_board():
+    board_id = request.form['board_id']
+    queries.remove_board(board_id)
+    return "OK"
 
 @app.route('/members')
 @login_required
@@ -89,6 +112,12 @@ def login():
             else:
                 if request.form['task'] == "login":
                     userdata = queries.get_user_by_name(request.form['username'])
+                    if not userdata:
+                        message = "Wrong username or password"
+                        return render_template('login.html',
+                                               form_type='login',
+                                               default_username=request.form['username'],
+                                               message=message)
                     password_hash = userdata[0]['password']
                     if bcrypt.checkpw(request.form['password'].encode('utf-8'), password_hash.encode('utf-8')):
                         session['account_id'] = userdata[0]['id']

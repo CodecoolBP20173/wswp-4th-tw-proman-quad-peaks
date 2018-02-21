@@ -3,7 +3,7 @@ dom = {
     global : {
         selectedAddButtonBoardId : 0,
     },
-    loadBoards: function() {
+    init : function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
             var boardInput = document.getElementById('newBoardInput');
             if(boardInput.value.length > 0)
@@ -30,6 +30,8 @@ dom = {
             }
 
         });
+    },
+    loadBoards: function() {
        dataHandler.getBoards(this.showBoards);
     },
     showBoards: function(boards_) {
@@ -39,7 +41,6 @@ dom = {
         let boardsParent = document.getElementById('boards');
         boardsParent.innerHTML='';
         boardsParent.classList.add('container');
-        boardsParent.innerHTML='<img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">'
 
         for (let i = 0; i < boards_.length; i++) {
 
@@ -50,16 +51,24 @@ dom = {
             let title = board.title;
             newBoard.innerHTML = title;
             let addCardButton = document.createElement('button');
+            let removeBoardButton = document.createElement('button');
             let buttonRow = document.createElement('div');
-            buttonRow.classList.add('row');
-            addCardButton.className = "btn btn-primary d-flex justify-content-center";
+            buttonRow.className = 'row d-flex justify-content-between';
+            addCardButton.className = "btn btn-primary";
             addCardButton.setAttribute("data-toggle", "modal");
             addCardButton.setAttribute("data-target", "#cardAddModal");
             addCardButton.innerHTML = 'Add New Task';
             addCardButton.addEventListener('click', function () {
                 dom.setSelectedAddButon(board.id);
             });
+            removeBoardButton.innerHTML = "REMOVE";
+            removeBoardButton.id = board.id;
+            removeBoardButton.className = "removeBoard";
+            removeBoardButton.addEventListener('click', function () {
+               dataHandler.removeBoard(this.id);
+            });
             buttonRow.appendChild(addCardButton);
+            buttonRow.appendChild(removeBoardButton);
             newBoard.className = "btn btn-link col text-left";
             if(board.is_active)
             {

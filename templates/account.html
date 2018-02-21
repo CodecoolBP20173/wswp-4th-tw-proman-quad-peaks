@@ -22,42 +22,20 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
             defer></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' defer></script>
-    <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/account.js') }}" defer></script>
 </head>
 <body>
 <h1>ProMan Groups</h1>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#boardAddModal" id="addBoardButton">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#groupAddModal" id="addGroupButton">
     A<br>D<br>D<br><br><br>G<br>R<br>O<br>U<br>P<br>!<br>
 </button>
-<div id="boards" class="container">
-    <table>
+<a href="/logout">Logout</a>
+<div class="container">
+    <table id="group_table">
         <tr>
-            <td class="btn btn-link col text-left collapsed">Group A</td>
             <td>
-                <button>Show</button>
-            </td>
-            <td>
-                <button>Remove</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="btn btn-link col text-left collapsed">Group B</td>
-            <td>
-                <button>Show</button>
-            </td>
-            <td>
-                <button>Remove</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="btn btn-link col text-left collapsed">Group C</td>
-            <td>
-                <button>Show</button>
-            </td>
-            <td>
-                <button>Remove</button>
+                LOADING
             </td>
         </tr>
     </table>
@@ -65,5 +43,29 @@
 <footer>
     <img class="logo" src="https://i.imgur.com/8Og2yc5.png" alt="Logo">
 </footer>
+
+<!-- Modal -->
+<div class="modal fade" id="groupAddModal" tabindex="-1" role="dialog" aria-labelledby="boardAddModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="boardAddModalLabel">Add New Group</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" required id="newGroupInput">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="addGroupSaveButton">Save Group
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
