@@ -41,7 +41,6 @@ dom = {
         let boardsParent = document.getElementById('boards');
         boardsParent.innerHTML='';
         boardsParent.classList.add('container');
-        boardsParent.innerHTML='<img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">'
 
         for (let i = 0; i < boards_.length; i++) {
 
