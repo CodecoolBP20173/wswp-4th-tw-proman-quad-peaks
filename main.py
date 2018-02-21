@@ -154,10 +154,25 @@ def login():
 @app.route('/delete_user', methods=['post'])
 def delete_members():
     group_id = '3' #session['group_id']
-    account_id = '4' #request.form['id']
+    account_id = '1' #request.form['id']
     queries.delete_member(group_id, account_id)
 
     return "OK"
+
+
+
+
+@app.route('/search/<pattern>')
+def search_accounts(pattern):
+    search_result = jsonify(queries.search_user(pattern))
+    print(search_result)
+    return search_result
+
+
+
+
+
+
 
 
 def main():
