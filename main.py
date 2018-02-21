@@ -151,10 +151,11 @@ def login():
 
 
 
-@app.route('/delete_user', methods=['post'])
+@app.route('/delete_user', methods=['POST'])
 def delete_members():
-    group_id = '3' #session['group_id']
-    account_id = '1' #request.form['id']
+    group_id = session['group_id']
+    account_id = request.form['id']
+
     queries.delete_member(group_id, account_id)
 
     return "OK"
