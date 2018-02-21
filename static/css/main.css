@@ -24,7 +24,7 @@ h1 {
     top: -1.9%;
     left: 3%;
     -webkit-animation:linear infinite ;
-    animation: horse_animation 3s infinite;
+    animation: horse_animation 3s paused;
     animation-timing-function: linear;
     animation-fill-mode: backwards;
     z-index: 2;
