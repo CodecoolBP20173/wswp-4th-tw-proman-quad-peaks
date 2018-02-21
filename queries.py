@@ -68,6 +68,13 @@ def add_group(account_id, title):
         """INSERT INTO account_groups (account_id, group_id) VALUES (%(account_id)s,%(group_id)s)""",
         {'account_id': account_id, 'group_id': group_id})
 
+def remove_group(group_id):
+    data_manager.execute_dml_statement("""
+                                        DELETE
+                                        FROM groups
+                                        WHERE groups.id=%(group_id)s;
+                                        """, {'group_id': group_id})
+
 
 def get_user_by_name(name):
     return data_manager.execute_select(
@@ -81,3 +88,4 @@ def add_user_account(name, password):
         {'name': name, 'pass': password}
     )
     return response
+

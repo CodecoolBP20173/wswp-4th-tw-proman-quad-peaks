@@ -67,6 +67,12 @@ def add_group():
     queries.add_group(account_id, group_title)
     return "OK"
 
+@app.route("/remove_group", methods=['POST'])
+def remove_group():
+    group_id = request.form['group_id']
+    queries.remove_group(group_id);
+    return "OK"
+
 
 @app.route('/members')
 @login_required

@@ -25,6 +25,27 @@ function show_groups() {
                     window.location.href = '/' + group_id;
                 });
 
+                $removeButton.on('click', function (event) {
+                    console.log('should remove group');
+                    group_id = event.target.id;
+                    $.ajax({
+                        dataType: "text",
+                        url: 'remove_group',
+                        data: {
+                            'group_id': group_id
+                        },
+                        cache: false,
+                        type: "POST",
+                        success: function (response) {
+                            console.log(response);
+                            show_groups();
+                        },
+                        error: function (xhr) {
+                            alert('something went wrong');
+                        }
+                    });
+                });
+
                 $showButton.addClass("showButton");
                 $removeButton.addClass("removeButton");
 
@@ -75,7 +96,3 @@ function addGroup() {
 }
 
 show_groups();
-
-$('.showButton').on('click', function () {
-
-});
