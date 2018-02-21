@@ -79,3 +79,17 @@ def delete_member(group_id, account_id):
                                         """,
                                        {'account_id': account_id, 'group_id': group_id})
 
+
+def get_user_by_name(name):
+    return data_manager.execute_select(
+        """SELECT * FROM accounts WHERE username=%(name)s;""",
+        {'name': name})
+
+
+def add_user_account(name, password):
+    response = data_manager.execute_dml_statement(
+        """INSERT INTO accounts (username, password) VALUES (%(name)s, %(pass)s)""",
+        {'name': name, 'pass': password}
+    )
+    return response
+
