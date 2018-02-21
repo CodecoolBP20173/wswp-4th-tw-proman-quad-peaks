@@ -36,7 +36,7 @@ body {
     align-content: center !important;
 
     background: linear-gradient(7deg, #244366, #664724);
-    background-size: 400% 400%;
+
 
     -webkit-animation: AnimationName 32s ease infinite;
     -moz-animation: AnimationName 32s ease infinite;
