@@ -31,7 +31,6 @@ def boards(group_id):
 def get_boards():
     group_id = session['group_id']
     data = queries.get_data(group_id)
-    print(data)
     return jsonify(data)
 
 
@@ -73,6 +72,11 @@ def remove_group():
     queries.remove_group(group_id);
     return "OK"
 
+@app.route("/remove_board", methods=['POST'])
+def remove_board():
+    board_id = request.form['board_id']
+    queries.remove_board(board_id)
+    return "OK"
 
 @app.route('/members')
 @login_required

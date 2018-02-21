@@ -52,16 +52,24 @@ dom = {
             let title = board.title;
             newBoard.innerHTML = title;
             let addCardButton = document.createElement('button');
+            let removeBoardButton = document.createElement('button');
             let buttonRow = document.createElement('div');
-            buttonRow.classList.add('row');
-            addCardButton.className = "btn btn-primary d-flex justify-content-center";
+            buttonRow.className = 'row d-flex justify-content-between';
+            addCardButton.className = "btn btn-primary";
             addCardButton.setAttribute("data-toggle", "modal");
             addCardButton.setAttribute("data-target", "#cardAddModal");
             addCardButton.innerHTML = 'Add New Task';
             addCardButton.addEventListener('click', function () {
                 dom.setSelectedAddButon(board.id);
             });
+            removeBoardButton.innerHTML = "REMOVE";
+            removeBoardButton.id = board.id;
+            removeBoardButton.className = "removeBoard";
+            removeBoardButton.addEventListener('click', function () {
+               dataHandler.removeBoard(this.id);
+            });
             buttonRow.appendChild(addCardButton);
+            buttonRow.appendChild(removeBoardButton);
             newBoard.className = "btn btn-link col text-left";
             if(board.is_active)
             {
