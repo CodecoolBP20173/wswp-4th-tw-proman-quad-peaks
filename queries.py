@@ -36,16 +36,19 @@ def save_data(group_id, cards, boards):
                  'group_id': group_id})
 
     for card in cards:
-        if is_in_current_data(current_cards, card['id']):
-            data_manager.execute_dml_statement("""UPDATE cards SET title=%(title)s,board_id=%(board_id)s,status_id=%(status_id)s,"order"=%(order)s
-                                                  WHERE id=%(card_id)s
-                                                """, {'title': card['title'], 'board_id': card['board_id'],
-                                                      'status_id': card['status_id'], 'order': card['order'],
-                                                      'card_id': card['id']})
+        if card['board_id'] is None:
+            remove_card(card['id'])
         else:
-            data_manager.execute_dml_statement(
-                """INSERT INTO cards (title, board_id) VALUES (%(title)s,%(board_id)s)""",
-                {'title': card['title'], 'board_id': card['board_id']})
+            if is_in_current_data(current_cards, card['id']):
+                data_manager.execute_dml_statement("""UPDATE cards SET title=%(title)s,board_id=%(board_id)s,status_id=%(status_id)s,"order"=%(order)s
+                                                      WHERE id=%(card_id)s
+                                                    """, {'title': card['title'], 'board_id': card['board_id'],
+                                                          'status_id': card['status_id'], 'order': card['order'],
+                                                          'card_id': card['id']})
+            else:
+                data_manager.execute_dml_statement(
+                    """INSERT INTO cards (title, board_id) VALUES (%(title)s,%(board_id)s)""",
+                    {'title': card['title'], 'board_id': card['board_id']})
 
 
 def is_in_current_data(current_data, id):
@@ -68,20 +71,22 @@ def add_group(account_id, title):
         """INSERT INTO account_groups (account_id, group_id) VALUES (%(account_id)s,%(group_id)s)""",
         {'account_id': account_id, 'group_id': group_id})
 
+
 def remove_group(group_id):
     data_manager.execute_dml_statement("""
                                         DELETE
                                         FROM groups
                                         WHERE groups.id=%(group_id)s;
                                         """, {'group_id': group_id})
-def get_members(group_id):
 
+
+def get_members(group_id):
     return data_manager.execute_select('''
                                 SELECT accounts.username, accounts.id FROM accounts
                                 JOIN account_groups a ON accounts.id = a.account_id
                                 JOIN groups ON a.group_id = groups.id
                                 WHERE groups.id = %(group_id)s;''',
-                                {'group_id': group_id})
+                                       {'group_id': group_id})
 
 
 def search_user(search_pattern):
@@ -96,7 +101,7 @@ def delete_member(group_id, account_id):
                                         DELETE FROM account_groups
                                         WHERE account_id = %(account_id)s AND group_id = %(group_id)s;
                                         """,
-                                       {'account_id': account_id, 'group_id': group_id})
+                                              {'account_id': account_id, 'group_id': group_id})
 
 
 def remove_board(board_id):
@@ -105,6 +110,14 @@ def remove_board(board_id):
                                         FROM boards
                                         WHERE boards.id = %(board_id)s;
                                         """, {'board_id': board_id})
+
+
+def remove_card(card_id):
+    data_manager.execute_dml_statement("""
+                                        DELETE 
+                                        FROM cards
+                                        WHERE cards.id = %(card_id)s;
+                                        """, {'card_id': card_id})
 
 
 def get_user_by_name(name):
@@ -120,3 +133,9 @@ def add_user_account(name, password):
     )
     return response
 
+
+def check_group_permission(account_id, group_id):
+    group = data_manager.execute_select("""
+                                        SELECT * FROM account_groups WHERE account_id=%(account_id)s AND group_id=%(group_id)s;
+                                        """, {'account_id': account_id, 'group_id': group_id})
+    return len(group) > 0

@@ -41,6 +41,7 @@ dom = {
         let boardsParent = document.getElementById('boards');
         boardsParent.innerHTML='';
         boardsParent.classList.add('container');
+        let bin = document.getElementById('bin');
 
         for (let i = 0; i < boards_.length; i++) {
 
@@ -116,7 +117,7 @@ dom = {
                 columns.push(column);
                 drag_containers.containers.push(column);
             }
-
+            drag_containers.containers.push(bin);
             newBoardContent.className = 'col container collapse';
             if(board.is_active)
             {

@@ -21,8 +21,11 @@ def login_required(function):
 @app.route("/<int:group_id>")
 @login_required
 def boards(group_id):
-    session['group_id'] = group_id
-    return render_template('boards.html')
+    if queries.check_group_permission(session['account_id'], group_id):
+        session['group_id'] = group_id
+        return render_template('boards.html')
+    else:
+        return "YOU DO NOT HAVE PERMISSION"
 
 
 
@@ -76,6 +79,13 @@ def remove_group():
 def remove_board():
     board_id = request.form['board_id']
     queries.remove_board(board_id)
+    return "OK"
+
+
+@app.route("/remove_card", methods=['POST'])
+def remove_card():
+    card_id = request.form['card_id']
+    queries.remove_card(card_id)
     return "OK"
 
 @app.route('/members')
