@@ -65,27 +65,16 @@
                             Search users
                         </label>
                     </div>
+
                     <input id="search-account-input" type="text">
                     <button class="search-account-button">
                     </button>
-                    {% if 1 == 1 %}
-                        <div class="table-holder-user-list">
-                            <table class="table-user-list">
-                                {% for i in range(5) %}
-                                    <tr>
-                                        <td>
-                                            User name
-                                        </td>
-                                        <td>
-                                            <button class="button-add-member">
-                                                Fel vagy véve
-                                            </button>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
-                    {% endif %}
+
+                    <div id="table_holder_for_search">
+                        <table id="search_results_table">
+                        </table>
+
+                    </div>
                 </div>
             </td>
 
