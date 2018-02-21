@@ -55,6 +55,25 @@ def is_in_current_data(current_data, id):
     return False
 
 
+def get_groups(account_id):
+    groups = data_manager.execute_select("""SELECT groups.id as group_id, name FROM groups JOIN account_groups a on groups.id = a.group_id
+                                            WHERE a.account_id = %(account_id)s""", {'account_id': account_id})
+    return groups
+
+
+def add_group(account_id, title):
+    group_id = data_manager.execute_dml_statement("""INSERT INTO groups (name) VALUES (%(title)s) RETURNING id""",
+                                                  {'title': title})
+    data_manager.execute_dml_statement(
+        """INSERT INTO account_groups (account_id, group_id) VALUES (%(account_id)s,%(group_id)s)""",
+        {'account_id': account_id, 'group_id': group_id})
+
+def remove_group(group_id):
+    data_manager.execute_dml_statement("""
+                                        DELETE
+                                        FROM groups
+                                        WHERE groups.id=%(group_id)s;
+                                        """, {'group_id': group_id})
 def get_members(group_id):
 
     return data_manager.execute_select('''
@@ -78,7 +97,6 @@ def delete_member(group_id, account_id):
                                         WHERE account_id = %(account_id)s AND group_id = %(group_id)s;
                                         """,
                                        {'account_id': account_id, 'group_id': group_id})
-
 
 def get_user_by_name(name):
     return data_manager.execute_select(
