@@ -31,11 +31,10 @@ dataHandler = {
             cache: false,
             type: "POST",
             success: function (response) {
-                if (response === 'OK')
-                {
+                if (response === 'OK') {
                     console.log('data saved')
                 }
-                else{
+                else {
                     alert('could not save data');
                 }
 
@@ -124,7 +123,29 @@ dataHandler = {
         }
         return max_order + 1;
     },
-
+    removeBoard: function (board_id) {
+        $.ajax({
+            dataType: "text",
+            url: 'remove_board',
+            data: {
+                'board_id': board_id
+            },
+            cache: false,
+            type: "POST",
+            success: function (response) {
+                if (response === 'OK') {
+                    console.log('board deleted');
+                    dataHandler._loadData();
+                }
+                else {
+                    alert('could not save data');
+                }
+            },
+            error: function (xhr) {
+                alert('could not save data');
+            }
+        });
+    },
     setActiveStatusForBoard: function (status, boardId) {
         for (let i = 0; i < this._data.boards.length; i++) {
             if (this._data.boards[i].id == boardId) {

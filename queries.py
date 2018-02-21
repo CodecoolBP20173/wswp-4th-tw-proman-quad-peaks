@@ -80,6 +80,14 @@ def delete_member(group_id, account_id):
                                        {'account_id': account_id, 'group_id': group_id})
 
 
+def remove_board(board_id):
+    data_manager.execute_dml_statement("""
+                                        DELETE 
+                                        FROM boards
+                                        WHERE boards.id = %(board_id)s;
+                                        """, {'board_id': board_id})
+
+
 def get_user_by_name(name):
     return data_manager.execute_select(
         """SELECT * FROM accounts WHERE username=%(name)s;""",
