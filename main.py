@@ -112,6 +112,12 @@ def login():
             else:
                 if request.form['task'] == "login":
                     userdata = queries.get_user_by_name(request.form['username'])
+                    if not userdata:
+                        message = "Wrong username or password"
+                        return render_template('login.html',
+                                               form_type='login',
+                                               default_username=request.form['username'],
+                                               message=message)
                     password_hash = userdata[0]['password']
                     if bcrypt.checkpw(request.form['password'].encode('utf-8'), password_hash.encode('utf-8')):
                         session['account_id'] = userdata[0]['id']
