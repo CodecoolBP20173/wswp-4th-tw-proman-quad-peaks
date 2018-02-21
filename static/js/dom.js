@@ -3,7 +3,7 @@ dom = {
     global : {
         selectedAddButtonBoardId : 0,
     },
-    loadBoards: function() {
+    init : function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
             var boardInput = document.getElementById('newBoardInput');
             if(boardInput.value.length > 0)
@@ -30,6 +30,8 @@ dom = {
             }
 
         });
+    },
+    loadBoards: function() {
        dataHandler.getBoards(this.showBoards);
     },
     showBoards: function(boards_) {

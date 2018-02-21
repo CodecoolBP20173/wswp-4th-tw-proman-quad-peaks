@@ -8,7 +8,6 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = "FJASIDKASÁDASÁKDNAÁSNDÁPIASNDÁPASÁDJSAÓOÓÖÖÓß$äĐ$äđßĐ"
 
-
 def login_required(function):
     @wraps(function)
     def wrap(*args, **kwargs):
@@ -24,6 +23,7 @@ def login_required(function):
 def boards(group_id):
     session['group_id'] = group_id
     return render_template('boards.html')
+
 
 
 @app.route("/get_boards")
