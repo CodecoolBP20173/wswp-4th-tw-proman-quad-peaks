@@ -46,6 +46,7 @@ def save_boards():
 
 
 @app.route("/account")
+@app.route("/")
 @login_required
 def account():
     return render_template('account.html')
