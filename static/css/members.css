@@ -16,3 +16,11 @@
 .table-holder-user-list{
     margin-top: 24px;
 }
+
+.search-account-button{
+    background:url(/static/images/find-people-32.png) no-repeat;
+    cursor:pointer;
+    width: 27px;
+    height: 27px;
+    border: none;
+}
