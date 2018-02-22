@@ -409,7 +409,7 @@ body {
 
 .removeBoard {
     border-color: black;
-    background-color: #ff540e !important;
+    background-color: #ff0008 !important;
     border-left: 2px solid black;
     border-top: none;
     border-right: none;
@@ -425,7 +425,7 @@ body {
 }
 
 .removeBoard:hover {
-    background-color: #ff4c13 !important;
+    background-color: #f40c32 !important;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 15) !important;
     border-color: black;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
