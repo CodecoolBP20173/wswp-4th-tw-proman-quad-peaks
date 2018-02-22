@@ -95,4 +95,12 @@ function addGroup() {
     $('#newCardInput').val("")
 }
 
+function readMessage() {
+    let errorMessage = document.getElementById('error-message');
+    if (errorMessage.dataset.message != ""){
+        alert(errorMessage.dataset.message);
+    }
+}
+
 show_groups();
+readMessage();
