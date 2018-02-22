@@ -1,10 +1,13 @@
 .member-page-main-table-holder{
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 90%;
+    margin: auto;
+    width: 50%;
+    height: 50%;
+
 }
 
-
+h2 {
+    color:#d1cfd6 !important;
+}
 
 .list-members {
     float: left;
@@ -24,4 +27,22 @@
 
 h1 .h1_second_part {
     color: black;
+}
+
+footer {
+    position: relative;
+    width: 10%;
+    height: auto;
+    alignment: center;
+    margin: auto;
+}
+footer .logo {
+    width: 100%;
+    height: auto;
+
+}
+
+
+td {
+    color: #faf2a5;
 }
