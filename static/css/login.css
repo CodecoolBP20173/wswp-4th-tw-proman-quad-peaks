@@ -1,9 +1,57 @@
+body {
+
+    align-content: center !important;
+
+    background: linear-gradient(to bottom, #244366 35%, #664724 100%);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+
 .login-registration-main-holder{
-    margin-left: 15%;
-    margin-top: 5%;
+
+    position: relative;
+    box-sizing: border-box;
+
 }
 
 .login-form-holder{
-    margin-top: 5%;
-    margin-left: 15%;
+    position: relative;
+    width: 100%;
+    height: 50%;
+    left: 37.8%;
+    text-align: center;
+
+}
+
+.login-card {
+    position: absolute;
+
+    margin-bottom: 100px;
+    padding-top: 3%;
+    padding-bottom: 2%;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+footer {
+    position: relative;
+    width: 10%;
+    height: auto;
+    alignment: center;
+    margin: auto;
+}
+footer .logo {
+    width: 100%;
+    height: auto;
+}
+
+.login-register-informative-text-for-developers {
+    color: #faf2a5;
+}
+#user-name-text, #password-text {
+    color: #faf2a5;
 }
