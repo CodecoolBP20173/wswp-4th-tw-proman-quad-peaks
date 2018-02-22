@@ -8,6 +8,7 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = "FJASIDKASÁDASÁKDNAÁSNDÁPIASNDÁPASÁDJSAÓOÓÖÖÓß$äĐ$äđßĐ"
 
+
 def login_required(function):
     @wraps(function)
     def wrap(*args, **kwargs):
@@ -18,6 +19,7 @@ def login_required(function):
 
     return wrap
 
+
 @app.route("/<int:group_id>")
 @login_required
 def boards(group_id):
@@ -25,8 +27,8 @@ def boards(group_id):
         session['group_id'] = group_id
         return render_template('boards.html')
     else:
-        return "YOU DO NOT HAVE PERMISSION"
-
+        session['message']="You have willingly given up your priviliges to be a member this group, so you don't belong here anymore, fool!"
+        return redirect('/account')
 
 
 @app.route("/get_boards")
@@ -52,7 +54,12 @@ def save_boards():
 @app.route("/")
 @login_required
 def account():
-    return render_template('account.html')
+    if 'message' in session:
+        message = session['message']
+        session.pop('message', None)
+    else:
+        message = ""
+    return render_template('account.html', message=message)
 
 
 @app.route("/get_groups")
@@ -69,11 +76,13 @@ def add_group():
     queries.add_group(account_id, group_title)
     return "OK"
 
+
 @app.route("/remove_group", methods=['POST'])
 def remove_group():
     group_id = request.form['group_id']
     queries.remove_group(group_id);
     return "OK"
+
 
 @app.route("/remove_board", methods=['POST'])
 def remove_board():
@@ -88,12 +97,14 @@ def remove_card():
     queries.remove_card(card_id)
     return "OK"
 
+
 @app.route('/members')
 @login_required
 def members():
     group_id = session['group_id']
 
     return render_template('members.html', group_id=group_id)
+
 
 @app.route('/get_group_members')
 @login_required
@@ -124,8 +135,8 @@ def login():
             message = validate.validate_request(request.form)
             if message != "":
                 return render_template('login.html',
-                                           form_type="",
-                                           specmessage=message)
+                                       form_type="",
+                                       specmessage=message)
             else:
                 if request.form['task'] == "login":
                     userdata = queries.get_user_by_name(request.form['username'])
@@ -152,11 +163,12 @@ def login():
                         message = validate.validate_password(request.form['password'])
                         if message != "":
                             return render_template('login.html',
-                                               form_type='register',
-                                               default_username=request.form['username'],
-                                               message=message)
+                                                   form_type='register',
+                                                   default_username=request.form['username'],
+                                                   message=message)
                         else:
-                            password_hash = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+                            password_hash = bcrypt.hashpw(request.form['password'].encode('utf-8'),
+                                                          bcrypt.gensalt()).decode('utf-8')
                             queries.add_user_account(request.form['username'], password_hash)
                             return redirect('/login')
                     else:
@@ -165,7 +177,6 @@ def login():
                                                form_type='register',
                                                default_username=request.form['username'],
                                                message=message)
-
 
 
 @app.route('/delete_user', methods=['POST'])
@@ -178,13 +189,12 @@ def delete_members():
     return "OK"
 
 
-
-
 @app.route('/search/<pattern>')
 def search_accounts(pattern):
     search_result = jsonify(queries.search_user(pattern, session['group_id']))
     print(search_result)
     return search_result
+
 
 @app.route('/add_user_to_group', methods=['post'])
 def add_user_to_group():
@@ -192,11 +202,6 @@ def add_user_to_group():
     group_id = session['group_id']
     queries.add_user_to_group(account_id, group_id)
     return 'ok'
-
-
-
-
-
 
 
 def main():
