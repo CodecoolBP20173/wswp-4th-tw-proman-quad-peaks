@@ -552,4 +552,14 @@ body {
 
 
 
+#group_table {
+    margin: auto;
 
+}
+tbody {
+    column-gap: 400px;
+}
+
+.btn.btn-link.col.text-left.collapsed {
+    padding-right: 10%;
+}
