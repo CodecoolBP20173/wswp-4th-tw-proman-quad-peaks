@@ -165,9 +165,10 @@ dom = {
     onDrop: function (el, target) {
         let card_id = parseInt(el.firstChild.id);
         let ids = target.id.split('/');
-        console.log(ids);
+        let currentBoardNumber = target.parentElement.parentElement.id.split('e')[1];
         let newBoard_id = parseInt(ids[0]);
         let newStatus_id = parseInt(ids[1]);
+        let horseList = document.getElementsByClassName('horse');
         dom.setCardOrder(target);
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
         if (target.id === 'bin') {
@@ -177,7 +178,7 @@ dom = {
             }, 1000)
         } else {
             console.log('fuck' + this + 'fuck');
-             $('.horse').addClass("active");
+            horseList[currentBoardNumber].classList.add("active");
             window.setTimeout( function () {
                 $('.horse').removeClass("active");
             }, 2500)
