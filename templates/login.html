@@ -86,7 +86,7 @@
                 <br>
                 <br>
                 <div class="login-form-submit-button-holder">
-                    <button form="login-form" type="submit" name="task" value="{{ form_type }}">
+                    <button form="login-form" type="submit" name="task" class="login-button" value="{{ form_type }}">
                         {% if form_type == 'login' %}
                             Login
                         {% else %}
@@ -97,7 +97,7 @@
             </form>
             <form action="/login" id="login-form-back" method="post">
                 <div class="login-form-back-button-holder">
-                    <button form="login-form-back" type="submit" value="" name="button">
+                    <button form="login-form-back" type="submit" value="" class="back-button"  name="button">
                         Back
                     </button>
                 </div>
