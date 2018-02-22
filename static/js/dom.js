@@ -2,6 +2,7 @@
 dom = {
     global : {
         selectedAddButtonBoardId : 0,
+        horseIsReady: true,
     },
     init : function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
@@ -177,7 +178,10 @@ dom = {
                 $('.bin').removeClass("animated");
             }, 1000)
         } else {
-            dom.horseAnimation(target, currentBoardNumber)
+            if (dom.global.horseIsReady) {
+                dom.global.horseIsReady = false;
+                dom.horseAnimation(target, currentBoardNumber);
+            }
         }
     },
     setCardOrder: function (column) {
@@ -198,6 +202,7 @@ dom = {
             horseList[currentBoardNumber].classList.add("active");
             window.setTimeout( function () {
                 $('.horse').removeClass("active");
+                dom.global.horseIsReady = true;
             }, 2500)
     }
 
