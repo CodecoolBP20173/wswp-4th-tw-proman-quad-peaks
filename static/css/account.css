@@ -497,11 +497,11 @@ body {
     font-family: 'Monoton';
     font-size: 1.4vw !important;
     letter-spacing: 0.1em;
-    color: #ff4c13;
+    color: black;
     border: none;
     border-radius: 10px;
     outline: none;
-    background: linear-gradient(45deg, #999590, #b09588, #999590);
+    background: linear-gradient(45deg, #999590, #b09588, #789199);
     background-size: 400% 400%;
     box-shadow: 0.5vw 0.5vw 0 #f08024;
     cursor: pointer;
@@ -545,11 +545,15 @@ body {
 }
 
 .removeButton {
-    animation: gradient 10s ease infinite;
+    animation: gradient 8s ease infinite;
     font-size: 1.3vw;
     box-shadow: 0.1vw 0.1vw 0 lightcoral;
   }
 
-
+.removeButton:hover, .showButton:hover {
+    animation: gradient 10s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.1vw 0.1vw 0 lightcoral;
+  }
 
 
