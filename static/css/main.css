@@ -409,7 +409,7 @@ body {
 
 .removeBoard {
     border-color: black;
-    background-color: #ff0008 !important;
+    /*background-color: #ff0008 !important;*/
     border-left: 2px solid black;
     border-top: none;
     border-right: none;
@@ -421,7 +421,19 @@ body {
     border-bottom-right-radius: 0;
     cursor: pointer;
     padding: .375rem .75rem
+    transform: translate(0%,-40%);
+    background: linear-gradient(45deg, #ff000a, #ff7c3b, #ff1000);
+    background-size: 400% 400%;
+    transition: all 0.3s ease;
+    animation: gradient 5s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.01vw 0.1vw 0 #f04900;
+}
 
+@keyframes gradient {
+  50% {
+    background-position: 100% 0;
+  }
 }
 
 .removeBoard:hover {
@@ -431,8 +443,6 @@ body {
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
 }
-
-/*------------------------------------------------------------------*/
 
 
 
