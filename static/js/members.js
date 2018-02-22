@@ -63,7 +63,21 @@ function addMemberListener(listOfDicts) {
     let buttons = document.getElementsByClassName("button-add-member");
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', function () {
-            console.log(listOfDicts[i].username)
+            $.ajax({
+                    dataType: "text",
+                    url: 'add_user_to_group',
+                    data: {
+                        'id': listOfDicts[i].id
+                    },
+                    cache: false,
+                    type: "POST",
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (xhr) {
+                        alert('something went wrong');
+                    }
+                });
         })
     }
 }

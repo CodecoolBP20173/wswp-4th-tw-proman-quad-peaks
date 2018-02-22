@@ -179,6 +179,12 @@ def search_accounts(pattern):
     print(search_result)
     return search_result
 
+@app.route('/add_user_to_group', methods=['post'])
+def add_user_to_group():
+    account_id = request.form['id']
+    group_id = session['group_id']
+    queries.add_user_to_group(account_id, group_id)
+    return 'ok'
 
 
 

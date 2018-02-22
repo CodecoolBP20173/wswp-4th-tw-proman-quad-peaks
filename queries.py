@@ -139,3 +139,10 @@ def check_group_permission(account_id, group_id):
                                         SELECT * FROM account_groups WHERE account_id=%(account_id)s AND group_id=%(group_id)s;
                                         """, {'account_id': account_id, 'group_id': group_id})
     return len(group) > 0
+
+
+def add_user_to_group(account_id, group_id):
+    data_manager.execute_dml_statement("""
+                                        INSERT INTO account_groups (account_id, group_id)
+                                        VALUES (%(account_id)s, %(group_id)s)
+                                        """, {'account_id': account_id, 'group_id': group_id})
