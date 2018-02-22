@@ -485,4 +485,71 @@ body {
 
 
 
+.showButton {
+    margin-top: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 10vw;
+    height: 3vw;
+    left: 30vw;
+    top: 30vh;
+    transform: translate(0%,-40%);
+    font-family: 'Monoton';
+    font-size: 1.4vw !important;
+    letter-spacing: 0.1em;
+    color: #ff4c13;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: linear-gradient(45deg, #999590, #b09588, #999590);
+    background-size: 400% 400%;
+    box-shadow: 0.5vw 0.5vw 0 #f08024;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.showButton {
+    animation: gradient 15s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.1vw 0.1vw 0 lightcoral;
+  }
+
+
+@keyframes gradient {
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+.removeButton {
+    margin-top: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 10vw;
+    height: 3vw;
+    left: 30vw;
+    top: 30vh;
+    transform: translate(0%,-40%);
+    font-family: 'Monoton', sans-serif;
+    font-size: 1.2vw;
+    letter-spacing: 0.1em;
+    color: #e8e8e8;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: linear-gradient(45deg, #db272c, #80152a, #db3100);
+    background-size: 400% 400%;
+    box-shadow: 0.5vw 0.5vw 0 #f08024;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.removeButton {
+    animation: gradient 10s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.1vw 0.1vw 0 lightcoral;
+  }
+
+
+
 
