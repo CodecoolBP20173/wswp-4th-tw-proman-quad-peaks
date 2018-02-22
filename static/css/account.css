@@ -1,0 +1,263 @@
+html {
+    height: 100%;
+}
+#header_container{
+
+    position: relative;
+
+}
+h1 {
+    font-family: 'Monoton', cursive !important;
+    position: relative;
+    margin-left: 9% !important;
+    color: #ff540e !important;
+    font-size: 8em !important;
+    font-weight: 200 !important;
+    font-style: italic !important;
+    padding: 2rem !important;
+    border-radius: 2rem !important;
+}
+.horse {
+    width: 130px;
+    height: auto;
+    position: absolute;
+    top: -1.9%;
+    left: 3%;
+    -webkit-animation:linear infinite ;
+    animation: horse_animation 3s paused;
+    animation-timing-function: linear;
+    animation-fill-mode: backwards;
+    z-index: 2;
+
+}
+
+
+footer {
+    position: relative;
+    width: 10%;
+    height: auto;
+    alignment: center;
+    margin: auto;
+}
+footer .logo {
+    width: 100%;
+    height: auto;
+}
+
+
+
+@keyframes horse_animation {
+
+
+    100% { left: 99%;}
+    0% {right: 90%}
+    0% {opacity: 0;}
+    5% {opacity: 0;}
+    10% {opacity: 1;}
+    50% {opacity: 1}
+    86% {opacity: 1}
+
+    90% {opacity: 0}
+    100% {opacity: 0}
+}
+
+
+img {
+    size: 0.5em;
+}
+#addBoardButton {
+    position: fixed;
+    top:25% !important;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    right: 0;
+    min-width: 50px;
+
+}
+
+body {
+
+    align-content: center !important ;
+
+    background: linear-gradient(to bottom, #244366 35%, #664724 100%);
+
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:33% 0%}
+    50%{background-position:68% 100%}
+    100%{background-position:33% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:33% 0%}
+    50%{background-position:68% 100%}
+    100%{background-position:33% 0%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:33% 0%}
+    50%{background-position:68% 100%}
+    100%{background-position:33% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:33% 0%}
+    50%{background-position:68% 100%}
+    100%{background-position:33% 0%}
+}
+
+
+#boards {
+    margin-top: 5%;
+    margin-bottom: 10px;
+    align-content: center;
+    padding: 0 !important ;
+    max-width: 80% !important;
+    background: transparent;
+    -webkit-animation: AnimationName 32s ease infinite;
+    -moz-animation: AnimationName 32s ease infinite;
+    animation: AnimationName 32s ease infinite;
+}
+
+.status_header {
+
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.5em;
+    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    padding-bottom: 2%;
+}
+
+.container {
+    position: relative;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.col > .row > .col {
+    max-width: 25%;
+    border-right: 1px solid black;
+}
+
+.col > .row > .col:nth-child(4n) {
+    border-right: none;
+}
+
+.col.container {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: #c2c2c7;;
+    background-clip: padding-box;
+
+
+}
+
+.card_container {
+    border: 2px solid black;
+    max-width: 90%;
+    word-break: break-all;
+    background: linear-gradient(135deg, rgba(247,247,247,1) 0%, rgba(227,227,227,1) 64%, rgba(240,240,240,1) 75%, rgba(255,255,255,1) 93%, rgba(255,255,255,1) 99%);
+    color: black;
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all .2s ease-in-out;
+}
+
+
+
+.card_container div {
+    font-size: 1.5em;
+    font-family: 'Cutive Mono', monospace, Serif;
+}
+
+.col > .row > .col > div:hover {
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+    -webkit-transition: 0.5s;
+}
+
+.gu-transit {
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+}
+
+.btn.btn-link {
+    background-color: rgb(109, 109, 109) !important;
+    color: #ff540e !important;
+    text-decoration: none !important;
+    position: relative;
+    padding: 20px;
+    font-size: 1.7em;
+    font-family: 'Roboto', monospace, Serif;
+    margin-bottom: 1%;
+    border: 2px solid black;
+}
+
+.btn.btn-link.col.text-left.opened {
+    margin-bottom: 0%;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    position: relative;
+}
+
+.btn.btn-link.col.text-left.collapsed {
+
+    margin-bottom: 1%;
+    border: 2px solid black;
+
+
+}
+
+
+.btn.btn-link:hover {
+    background-color: #999590 !important;
+    -webkit-transition-duration: 0.5s !important;
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+}
+
+.btn.btn-primary  {
+    background-color: #ff540e !important;
+    border: 2px solid black;
+}
+
+.btn.btn-primary:hover  {
+    background-color: #ff4c13 !important;
+    box-shadow: 0 4px 4px rgba(0,0,0,15) !important;
+}
+
+.col.container.collapse.show {
+    padding-bottom: 0.5%;
+    margin-bottom: 1% !important;
+    transition-duration: 0.3s !important;
+}
+
+.col.container.collapsing {
+    margin-top: -1%;
+    margin-bottom: 1% !important;
+
+}
+
+
+/*------------------------------------------------------------------*/
+
+
+
+
+
+

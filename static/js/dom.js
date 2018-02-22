@@ -3,7 +3,7 @@ dom = {
     global : {
         selectedAddButtonBoardId : 0,
     },
-    loadBoards: function() {
+    init : function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
             var boardInput = document.getElementById('newBoardInput');
             if(boardInput.value.length > 0)
@@ -30,6 +30,8 @@ dom = {
             }
 
         });
+    },
+    loadBoards: function() {
        dataHandler.getBoards(this.showBoards);
     },
     showBoards: function(boards_) {
@@ -39,7 +41,10 @@ dom = {
         let boardsParent = document.getElementById('boards');
         boardsParent.innerHTML='';
         boardsParent.classList.add('container');
+        let bin = document.getElementById('bin');
+
         for (let i = 0; i < boards_.length; i++) {
+
             let board = boards_[i];
             let cards = dom.loadCards(board.id);
             let newBoard = document.createElement("button");
@@ -47,18 +52,26 @@ dom = {
             let title = board.title;
             newBoard.innerHTML = title;
             let addCardButton = document.createElement('button');
+            let removeBoardButton = document.createElement('button');
             let buttonRow = document.createElement('div');
-            buttonRow.classList.add('row');
-            addCardButton.className = "btn btn-primary d-flex justify-content-center";
+            buttonRow.className = 'row d-flex justify-content-between';
+            addCardButton.className = "btn btn-primary";
             addCardButton.setAttribute("data-toggle", "modal");
             addCardButton.setAttribute("data-target", "#cardAddModal");
             addCardButton.innerHTML = 'Add New Task';
             addCardButton.addEventListener('click', function () {
                 dom.setSelectedAddButon(board.id);
             });
+            removeBoardButton.innerHTML = "Remove Board!";
+            removeBoardButton.id = board.id;
+            removeBoardButton.className = "removeBoard";
+            removeBoardButton.addEventListener('click', function () {
+               dataHandler.removeBoard(this.id);
+            });
             buttonRow.appendChild(addCardButton);
+            buttonRow.appendChild(removeBoardButton);
             newBoard.className = "btn btn-link col text-left";
-            if(board.is_active === 'true')
+            if(board.is_active)
             {
                 newBoard.classList.add("opened");
             }
@@ -104,15 +117,16 @@ dom = {
                 columns.push(column);
                 drag_containers.containers.push(column);
             }
-
+            drag_containers.containers.push(bin);
             newBoardContent.className = 'col container collapse';
-            if(board.is_active === 'true')
+            if(board.is_active)
             {
                 newBoardContent.classList.add('show')
             }
             newBoardContent.id = 'collapse' + i;
             boardsParent.appendChild(newBoardContent);
             dom.showCards(cards,columns);
+
         }
 
     },
@@ -152,6 +166,12 @@ dom = {
         let newStatus_id = parseInt(ids[1]);
         dom.setCardOrder(target);
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
+        if (target.id === 'bin') {
+            $('.bin').addClass("animated");
+            window.setTimeout( function () {
+                $('.bin').removeClass("animated");
+            }, 1000)
+        }
     },
     setCardOrder: function (column) {
         // To be called RIGHT AFTER drag-and-dropping a card
@@ -166,5 +186,14 @@ dom = {
         }
     }
 
+
     // here comes more features
 };
+
+    // bin animation
+
+
+
+
+
+
