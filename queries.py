@@ -96,7 +96,7 @@ def search_user(search_pattern, group):
         (SELECT accounts.id AS id FROM accounts INNER JOIN account_groups ON accounts.id=account_groups.account_id
         WHERE account_groups.group_id=%(group)s) AS temp
         ON accounts.id=temp.id
-        WHERE LOWER(username) LIKE (%(pattern)s) AND temp.id IS NULL;""",
+        WHERE LOWER(username) LIKE LOWER(%(pattern)s) AND temp.id IS NULL;""",
         {'pattern': '%' + search_pattern + '%', 'group': group})
 
 
