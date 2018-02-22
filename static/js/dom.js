@@ -62,7 +62,7 @@ dom = {
             addCardButton.addEventListener('click', function () {
                 dom.setSelectedAddButon(board.id);
             });
-            removeBoardButton.innerHTML = "REMOVE";
+            removeBoardButton.innerHTML = "Remove Board!";
             removeBoardButton.id = board.id;
             removeBoardButton.className = "removeBoard";
             removeBoardButton.addEventListener('click', function () {
@@ -166,6 +166,12 @@ dom = {
         let newStatus_id = parseInt(ids[1]);
         dom.setCardOrder(target);
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
+        if (target.id === 'bin') {
+            $('.bin').addClass("animated");
+            window.setTimeout( function () {
+                $('.bin').removeClass("animated");
+            }, 1000)
+        }
     },
     setCardOrder: function (column) {
         // To be called RIGHT AFTER drag-and-dropping a card
@@ -180,5 +186,14 @@ dom = {
         }
     }
 
+
     // here comes more features
 };
+
+    // bin animation
+
+
+
+
+
+

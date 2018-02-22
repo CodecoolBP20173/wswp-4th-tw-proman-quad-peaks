@@ -23,13 +23,15 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
             defer></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' defer></script>
-    <script src="{{ url_for('static', filename='js/members.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/members.js') }}" defer></script>
 
 </head>
 <body>
-<h1>ProMan</h1>
-
+<div id="header_container">
+    <h1>ProMan</h1>
+    <a id="goback" href="{{ url_for('boards', group_id=group_id) }}">BACK</a>
+</div>
 <div class="member-page-main-table-holder">
     <table class="member-page-main-talble">
         <tr>
@@ -40,19 +42,8 @@
                         Members:
                     </h2>
                     <div class="table-holder-members">
-                        <table class="table-members">
-                            {% for member in members %}
-                                <tr>
-                                    <td>
-                                        {{ member.username }}
-                                    </td>
-                                    <td>
-                                        <button id="{{ member.id }}" class="button-kick-member">
-                                            Ki vagy rúgva
-                                        </button>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                        <table class="table-members" id="table-members">
+
                         </table>
                     </div>
                 </div>

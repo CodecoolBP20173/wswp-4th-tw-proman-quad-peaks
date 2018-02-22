@@ -90,9 +90,16 @@ def remove_card():
 
 @app.route('/members')
 @login_required
-def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
-    members = queries.get_members(session['group_id'])
-    return render_template('members.html', members=members)
+def members():
+    group_id = session['group_id']
+
+    return render_template('members.html', group_id=group_id)
+
+@app.route('/get_group_members')
+@login_required
+def get_group_members():
+    group_members = jsonify(queries.get_members(session['group_id']))
+    return group_members
 
 
 @app.route('/logout')
@@ -161,10 +168,11 @@ def login():
 
 
 
-@app.route('/delete_user', methods=['post'])
+@app.route('/delete_user', methods=['POST'])
 def delete_members():
-    group_id = '3' #session['group_id']
-    account_id = '1' #request.form['id']
+    group_id = session['group_id']
+    account_id = request.form['id']
+
     queries.delete_member(group_id, account_id)
 
     return "OK"
@@ -174,10 +182,16 @@ def delete_members():
 
 @app.route('/search/<pattern>')
 def search_accounts(pattern):
-    search_result = jsonify(queries.search_user(pattern))
+    search_result = jsonify(queries.search_user(pattern, session['group_id']))
     print(search_result)
     return search_result
 
+@app.route('/add_user_to_group', methods=['post'])
+def add_user_to_group():
+    account_id = request.form['id']
+    group_id = session['group_id']
+    queries.add_user_to_group(account_id, group_id)
+    return 'ok'
 
 
 

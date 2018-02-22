@@ -89,35 +89,39 @@ def get_members(group_id):
                                        {'group_id': group_id})
 
 
-def search_user(search_pattern):
+def search_user(search_pattern, group):
     return data_manager.execute_select(
-        """SELECT id, username FROM accounts WHERE LOWER(username) LIKE LOWER(%(pattern)s)""",
-        {'pattern': '%' + search_pattern + '%'}
-    )
+        """SELECT accounts.id, username FROM accounts
+        LEFT JOIN
+        (SELECT accounts.id AS id FROM accounts INNER JOIN account_groups ON accounts.id=account_groups.account_id
+        WHERE account_groups.group_id=%(group)s) AS temp
+        ON accounts.id=temp.id
+        WHERE LOWER(username) LIKE (%(pattern)s) AND temp.id IS NULL;""",
+        {'pattern': '%' + search_pattern + '%', 'group': group})
 
 
 def delete_member(group_id, account_id):
     return data_manager.execute_dml_statement("""
-                                        DELETE FROM account_groups
-                                        WHERE account_id = %(account_id)s AND group_id = %(group_id)s;
-                                        """,
+                                    DELETE FROM account_groups
+                                    WHERE account_id = %(account_id)s AND group_id = %(group_id)s;
+                                    """,
                                               {'account_id': account_id, 'group_id': group_id})
 
 
 def remove_board(board_id):
     data_manager.execute_dml_statement("""
-                                        DELETE 
-                                        FROM boards
-                                        WHERE boards.id = %(board_id)s;
-                                        """, {'board_id': board_id})
+                                    DELETE 
+                                    FROM boards
+                                    WHERE boards.id = %(board_id)s;
+                                    """, {'board_id': board_id})
 
 
 def remove_card(card_id):
     data_manager.execute_dml_statement("""
-                                        DELETE 
-                                        FROM cards
-                                        WHERE cards.id = %(card_id)s;
-                                        """, {'card_id': card_id})
+                                    DELETE 
+                                    FROM cards
+                                    WHERE cards.id = %(card_id)s;
+                                    """, {'card_id': card_id})
 
 
 def get_user_by_name(name):
@@ -136,6 +140,13 @@ def add_user_account(name, password):
 
 def check_group_permission(account_id, group_id):
     group = data_manager.execute_select("""
-                                        SELECT * FROM account_groups WHERE account_id=%(account_id)s AND group_id=%(group_id)s;
-                                        """, {'account_id': account_id, 'group_id': group_id})
+                                    SELECT * FROM account_groups WHERE account_id=%(account_id)s AND group_id=%(group_id)s;
+                                    """, {'account_id': account_id, 'group_id': group_id})
     return len(group) > 0
+
+
+def add_user_to_group(account_id, group_id):
+    data_manager.execute_dml_statement("""
+                                    INSERT INTO account_groups (account_id, group_id)
+                                    VALUES (%(account_id)s, %(group_id)s)
+                                    """, {'account_id': account_id, 'group_id': group_id})
