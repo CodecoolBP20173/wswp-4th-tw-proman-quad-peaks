@@ -175,7 +175,7 @@ def delete_members():
 
 @app.route('/search/<pattern>')
 def search_accounts(pattern):
-    search_result = jsonify(queries.search_user(pattern))
+    search_result = jsonify(queries.search_user(pattern, session['group_id']))
     print(search_result)
     return search_result
 
