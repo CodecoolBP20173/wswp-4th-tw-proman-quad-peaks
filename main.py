@@ -90,9 +90,10 @@ def remove_card():
 
 @app.route('/members')
 @login_required
-def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
+def members():
+    group_id = session['group_id']
 
-    return render_template('members.html')
+    return render_template('members.html', group_id=group_id)
 
 @app.route('/get_group_members')
 @login_required

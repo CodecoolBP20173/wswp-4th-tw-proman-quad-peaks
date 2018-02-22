@@ -59,6 +59,28 @@ h1 {
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+#goMembers {
+    position: absolute;
+    top: 0%;
+    right: 0;
+    background-color: #ff540e !important;
+    border: 2px solid black;
+    border-bottom-left-radius: 10px;
+    color: white;
+    cursor: pointer;
+    padding: .375rem .75rem;
+    text-decoration: none;
+
+}
+
+#goMembers:hover {
+    background-color: #ff4c13 !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 15) !important;
+    border-color: black;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
 footer {
     position: relative;
     width: 10%;
