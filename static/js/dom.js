@@ -168,7 +168,7 @@ dom = {
         let currentBoardNumber = target.parentElement.parentElement.id.split('e')[1];
         let newBoard_id = parseInt(ids[0]);
         let newStatus_id = parseInt(ids[1]);
-        let horseList = document.getElementsByClassName('horse');
+
         dom.setCardOrder(target);
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
         if (target.id === 'bin') {
@@ -177,11 +177,7 @@ dom = {
                 $('.bin').removeClass("animated");
             }, 1000)
         } else {
-            console.log('fuck' + this + 'fuck');
-            horseList[currentBoardNumber].classList.add("active");
-            window.setTimeout( function () {
-                $('.horse').removeClass("active");
-            }, 2500)
+            dom.horseAnimation(target, currentBoardNumber)
         }
     },
     setCardOrder: function (column) {
@@ -195,8 +191,15 @@ dom = {
             var card_id = parseInt(cardList[j].firstChild.id);
             dataHandler.setOrderForCard(card_id,j);
         }
-    }
+    },
 
+    horseAnimation: function (target, currentBoardNumber) {
+        let horseList = document.getElementsByClassName('horse');
+            horseList[currentBoardNumber].classList.add("active");
+            window.setTimeout( function () {
+                $('.horse').removeClass("active");
+            }, 2500)
+    }
 
     // here comes more features
 };
