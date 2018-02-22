@@ -46,3 +46,77 @@ footer .logo {
 td {
     color: #faf2a5;
 }
+
+.button-kick-member{
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 10vw;
+    height: 3vw;
+    left: 30vw;
+    top: 30vh;
+    transform: translate(0%,-40%);
+    font-size: 1.1vw !important;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: linear-gradient(45deg, #999590, #b09588, #99524b);
+    background-size: 400% 400%;
+    box-shadow: 0.5vw 0.5vw 0 #321908;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button-kick-member {
+    animation: gradient 15s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.1vw 0.1vw 0 #f0a39f;
+  }
+
+
+@keyframes gradient {
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+.button-kick-member:hover {
+    animation: gradient 5s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.3vw 0.3vw 0 #731f22;
+  }
+
+.button-add-member{
+    margin-top: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 10vw;
+    height: 3vw;
+    left: 30vw;
+    top: 30vh;
+    transform: translate(0%,-40%);
+    font-size: 1.1vw !important;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: linear-gradient(45deg, #999590, #60b065, #61995d);
+    background-size: 400% 400%;
+    box-shadow: 0.5vw 0.5vw 0 #143225;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button-add-member {
+    animation: gradient 15s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.1vw 0.1vw 0 #3b6d36;
+  }
+
+
+.button-add-member:hover {
+    animation: gradient 5s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.3vw 0.3vw 0 #347334;
+  }
