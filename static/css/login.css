@@ -113,3 +113,14 @@ footer .logo {
     top: 50px;
     right: 0px;
 }
+
+.login-form-error-message-holder, .spec-error-message-holder{
+    color: red;
+    animation: blinker 2s linear infinite;
+    font-size: larger;
+}
+
+
+@keyframes blinker {
+  30% { opacity: 0; }
+}
