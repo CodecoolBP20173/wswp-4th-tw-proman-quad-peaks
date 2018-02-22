@@ -12,6 +12,10 @@ html {
     position: relative;
 }
 
+.horseBoardContainer {
+    position: relative;
+}
+
 h1 {
     font-family: 'Monoton', cursive !important;
     position: relative;
@@ -29,13 +33,19 @@ h1 {
     width: 130px;
     height: auto;
     position: absolute;
-    top: -1.9%;
+    top: -20%;
     left: 3%;
     -webkit-animation: linear infinite;
-    animation: horse_animation 3s paused;
-    animation-timing-function: linear;
-    animation-fill-mode: backwards;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.horse.active {
+
     z-index: 2;
+    animation-iteration-count: 1;
+    animation: horse_animation 3s ;
+    animation-timing-function: linear;
 
 }
 

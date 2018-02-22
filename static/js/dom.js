@@ -42,13 +42,17 @@ dom = {
         boardsParent.innerHTML='';
         boardsParent.classList.add('container');
         let bin = document.getElementById('bin');
+        let horse ='<img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">';
 
         for (let i = 0; i < boards_.length; i++) {
-
             let board = boards_[i];
             let cards = dom.loadCards(board.id);
             let newBoard = document.createElement("button");
-            boardsParent.appendChild(newBoard);
+            let horseStall = document.createElement("div");
+            horseStall.classList.add('horseBoardContainer');
+            horseStall.innerHTML = horse;
+            horseStall.appendChild(newBoard);
+            boardsParent.appendChild(horseStall);
             let title = board.title;
             newBoard.innerHTML = title;
             let addCardButton = document.createElement('button');
@@ -171,6 +175,12 @@ dom = {
             window.setTimeout( function () {
                 $('.bin').removeClass("animated");
             }, 1000)
+        } else {
+            console.log('fuck' + this + 'fuck');
+             $('.horse').addClass("active");
+            window.setTimeout( function () {
+                $('.horse').removeClass("active");
+            }, 2500)
         }
     },
     setCardOrder: function (column) {
@@ -190,7 +200,7 @@ dom = {
     // here comes more features
 };
 
-    // bin animation
+
 
 
 
