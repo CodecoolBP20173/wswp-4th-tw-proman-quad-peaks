@@ -91,8 +91,14 @@ def remove_card():
 @app.route('/members')
 @login_required
 def show_members_page_for_testing_purposes_definitely_rename_and_or_rewrite_this():
-    members = queries.get_members(session['group_id'])
-    return render_template('members.html', members=members)
+
+    return render_template('members.html')
+
+@app.route('/get_group_members')
+@login_required
+def get_group_members():
+    group_members = jsonify(queries.get_members(session['group_id']))
+    return group_members
 
 
 @app.route('/logout')
