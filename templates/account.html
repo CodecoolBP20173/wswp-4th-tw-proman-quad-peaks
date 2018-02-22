@@ -26,7 +26,7 @@
     <script src="{{ url_for('static', filename='js/account.js') }}" defer></script>
 </head>
 <body>
-<h1>ProMan Groups</h1>
+<h1>ProMan<span class="h1_second_part"> Groups</span> </h1>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#groupAddModal" id="addGroupButton">
     A<br>D<br>D<br><br><br>G<br>R<br>O<br>U<br>P<br>!<br>
 </button>
@@ -65,6 +65,8 @@
             </div>
         </div>
     </div>
+</div>
+<div id="error-message" data-message="{{ message }}">
 </div>
 </body>
 </html>

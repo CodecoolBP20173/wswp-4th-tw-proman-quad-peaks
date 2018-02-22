@@ -29,22 +29,23 @@
 </head>
 <body>
 <h1>ProMan</h1>
-<img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">
-
 {% if form_type == "" %}
     <div class="login-registration-main-holder">
-        <form action="/login" method="post" id="login-choice-form">
-            <div class="login-button-holder">
-                <button class="login-button" name="button" value="login" type="submit" form="login-choice-form">
-                    Log in
-                </button>
-            </div>
-            <div class="register-button-holder">
-                <button class="register-button" name="button" value="register" type="submit" form="login-choice-form">
-                    Register
-                </button>
-            </div>
-        </form>
+        <div class="login-card">
+            <form action="/login" method="post" id="login-choice-form">
+                <div class="login-button-holder">
+                    <button class="login-button" name="button" value="login" type="submit" form="login-choice-form">
+                        Log in
+                    </button>
+                </div>
+                <div class="register-button-holder">
+                    <button class="register-button" name="button" value="register" type="submit"
+                            form="login-choice-form">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
     {% if specmessage %}
         <div class="spec-error-message-holder">
@@ -54,44 +55,54 @@
 
 {% else %}
     <div class="login-form-holder">
-        <p class="login-register-informative-text-for-developers">
-            This is only shown after login or register is clicked.
-        </p>
-        <form action="/login" id="login-form" method="post">
-            <div class="login-form-username-holder">
-                <label for="user-name">
-                    User name
-                </label>
-                <input type="text" id="user-name" name="username" required value="{{ default_username }}">
-            </div>
-            <div class="login-form-password-holder">
-                <label for="password">
-                    Password
-                </label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            {% if message != "" %}
-                <div class="login-form-error-message-holder">
-                    {{ message }}
+        <div class="login-card">
+            <p class="login-register-informative-text-for-developers">
+                Welcome to the Proman, please log in.
+
+            </p>
+            <br>
+            <form action="/login" id="login-form" method="post">
+                <div class="login-form-username-holder">
+                    <div id="user-name-text">
+                        Username
+                    </div>
+                    <br>
+                    <input type="text" id="user-name" name="username" required value="{{ default_username }}">
                 </div>
-            {% endif %}
-            <div class="login-form-submit-button-holder">
-                <button form="login-form" type="submit" name="task" value="{{ form_type }}">
-                    {% if form_type == 'login' %}
-                        Login
-                    {% else %}
-                        Register
-                    {% endif %}
-                </button>
-            </div>
-        </form>
-        <form action="/login" id="login-form-back" method="post">
-            <div class="login-form-back-button-holder">
-                <button form="login-form-back" type="submit" value="" name="button">
-                    Back
-                </button>
-            </div>
-        </form>
+                <br>
+                <br>
+                <div class="login-form-password-holder">
+                    <div id="password-text">
+                        Password
+                    </div>
+                    <br>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                {% if message != "" %}
+                    <div class="login-form-error-message-holder">
+                        {{ message }}
+                    </div>
+                {% endif %}
+                <br>
+                <br>
+                <div class="login-form-submit-button-holder">
+                    <button form="login-form" type="submit" name="task" class="login-button" value="{{ form_type }}">
+                        {% if form_type == 'login' %}
+                            Login
+                        {% else %}
+                            Register
+                        {% endif %}
+                    </button>
+                </div>
+            </form>
+            <form action="/login" id="login-form-back" method="post">
+                <div class="login-form-back-button-holder">
+                    <button form="login-form-back" type="submit" value="" class="back-button"  name="button">
+                        Back
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 {% endif %}
 
