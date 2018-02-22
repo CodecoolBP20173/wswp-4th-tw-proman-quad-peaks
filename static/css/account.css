@@ -495,7 +495,7 @@ body {
     top: 30vh;
     transform: translate(0%,-40%);
     font-family: 'Monoton';
-    font-size: 1.4vw !important;
+    font-size: 1.3vw ;
     letter-spacing: 0.1em;
     color: black;
     border: none;
@@ -553,7 +553,7 @@ body {
 .removeButton:hover, .showButton:hover {
     animation: gradient 10s ease infinite;
     font-size: 1.3vw;
-    box-shadow: 0.1vw 0.1vw 0 lightcoral;
+    box-shadow: 0.3vw 0.3vw 0 #180c0c;
   }
 
 
