@@ -1,12 +1,24 @@
 .member-page-main-table-holder{
     margin: auto;
-    width: 50%;
+    width: 70%;
     height: 50%;
+
 
 }
 
 h2 {
     color:#d1cfd6 !important;
+    padding-bottom: 5%;
+    font-size: 6em !important;
+}
+
+#search-account-input{
+    width: 90% !important;
+    height: 70px !important;
+    font-size: 2.5em;
+}
+.search-header-container{
+    padding-bottom: 5% !important;
 }
 
 .list-members {
@@ -35,6 +47,7 @@ footer {
     height: auto;
     alignment: center;
     margin: auto;
+    bottom: 1%;
 }
 footer .logo {
     width: 100%;
@@ -45,6 +58,7 @@ footer .logo {
 
 td {
     color: #faf2a5;
+    font-size: 3em;
 }
 
 .button-kick-member{
