@@ -29,10 +29,10 @@
 </head>
 <body>
 <h1>ProMan</h1>
-<img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">
-
 {% if form_type == "" %}
-    <div class="login-registration-main-holder">
+
+
+    <div class="login-card">
         <form action="/login" method="post" id="login-choice-form">
             <div class="login-button-holder">
                 <button class="login-button" name="button" value="login" type="submit" form="login-choice-form">
@@ -40,11 +40,13 @@
                 </button>
             </div>
             <div class="register-button-holder">
-                <button class="register-button" name="button" value="register" type="submit" form="login-choice-form">
+                <button class="register-button" name="button" value="register" type="submit"
+                        form="login-choice-form">
                     Register
                 </button>
             </div>
         </form>
+    </div>
     </div>
     {% if specmessage %}
         <div class="spec-error-message-holder">
@@ -53,21 +55,27 @@
     {% endif %}
 
 {% else %}
-    <div class="login-form-holder">
+    <div class="login-card">
         <p class="login-register-informative-text-for-developers">
-            This is only shown after login or register is clicked.
+            Welcome to the Proman, please log in.
+
         </p>
+        <br>
         <form action="/login" id="login-form" method="post">
             <div class="login-form-username-holder">
-                <label for="user-name">
-                    User name
-                </label>
+                <div id="user-name-text">
+                    Username
+                </div>
+                <br>
                 <input type="text" id="user-name" name="username" required value="{{ default_username }}">
             </div>
+            <br>
+            <br>
             <div class="login-form-password-holder">
-                <label for="password">
+                <div id="password-text">
                     Password
-                </label>
+                </div>
+                <br>
                 <input type="password" id="password" name="password" required>
             </div>
             {% if message != "" %}
@@ -75,8 +83,10 @@
                     {{ message }}
                 </div>
             {% endif %}
+            <br>
+            <br>
             <div class="login-form-submit-button-holder">
-                <button form="login-form" type="submit" name="task" value="{{ form_type }}">
+                <button form="login-form" type="submit" name="task" value="{{ form_type }}" class="login-button">
                     {% if form_type == 'login' %}
                         Login
                     {% else %}
@@ -87,18 +97,19 @@
         </form>
         <form action="/login" id="login-form-back" method="post">
             <div class="login-form-back-button-holder">
-                <button form="login-form-back" type="submit" value="" name="button">
+                <button class="back-button" form="login-form-back" type="submit" value="" name="button">
                     Back
                 </button>
             </div>
         </form>
     </div>
+
 {% endif %}
 
 <br>
 <br>
 <footer>
-    <img class="logo" src="https://i.imgur.com/8Og2yc5.png" alt="Logo">
+    <img class="logo" src="/static/images/logo.png" alt="Logo">
 </footer>
 </body>
 </html>

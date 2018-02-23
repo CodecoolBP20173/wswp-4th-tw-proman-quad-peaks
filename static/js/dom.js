@@ -2,6 +2,7 @@
 dom = {
     global : {
         selectedAddButtonBoardId : 0,
+        horseIsReady: true,
     },
     init : function() {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
@@ -42,13 +43,17 @@ dom = {
         boardsParent.innerHTML='';
         boardsParent.classList.add('container');
         let bin = document.getElementById('bin');
+        let horse ='<img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">';
 
         for (let i = 0; i < boards_.length; i++) {
-
             let board = boards_[i];
             let cards = dom.loadCards(board.id);
             let newBoard = document.createElement("button");
-            boardsParent.appendChild(newBoard);
+            let horseStall = document.createElement("div");
+            horseStall.classList.add('horseBoardContainer');
+            horseStall.innerHTML = horse;
+            horseStall.appendChild(newBoard);
+            boardsParent.appendChild(horseStall);
             let title = board.title;
             newBoard.innerHTML = title;
             let addCardButton = document.createElement('button');
@@ -161,9 +166,10 @@ dom = {
     onDrop: function (el, target) {
         let card_id = parseInt(el.firstChild.id);
         let ids = target.id.split('/');
-        console.log(ids);
+        let currentBoardNumber = target.parentElement.parentElement.id.split('e')[1];
         let newBoard_id = parseInt(ids[0]);
         let newStatus_id = parseInt(ids[1]);
+
         dom.setCardOrder(target);
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
         if (target.id === 'bin') {
@@ -171,6 +177,11 @@ dom = {
             window.setTimeout( function () {
                 $('.bin').removeClass("animated");
             }, 1000)
+        } else {
+            if (dom.global.horseIsReady) {
+                dom.global.horseIsReady = false;
+                dom.horseAnimation(target, currentBoardNumber);
+            }
         }
     },
     setCardOrder: function (column) {
@@ -184,13 +195,21 @@ dom = {
             var card_id = parseInt(cardList[j].firstChild.id);
             dataHandler.setOrderForCard(card_id,j);
         }
-    }
+    },
 
+    horseAnimation: function (target, currentBoardNumber) {
+        let horseList = document.getElementsByClassName('horse');
+            horseList[currentBoardNumber].classList.add("active");
+            window.setTimeout( function () {
+                $('.horse').removeClass("active");
+                dom.global.horseIsReady = true;
+            }, 3000)
+    }
 
     // here comes more features
 };
 
-    // bin animation
+
 
 
 

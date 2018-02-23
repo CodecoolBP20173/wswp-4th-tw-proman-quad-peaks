@@ -26,11 +26,15 @@
     <script src="{{ url_for('static', filename='js/account.js') }}" defer></script>
 </head>
 <body>
-<h1>ProMan Groups</h1>
+<h1>ProMan<span class="h1_second_part"> Groups</span> </h1>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#groupAddModal" id="addGroupButton">
     A<br>D<br>D<br><br><br>G<br>R<br>O<br>U<br>P<br>!<br>
 </button>
-<a href="/logout">Logout</a>
+
+<div class="logout-text-container">
+    <a class="logout-text" href="/logout">Logout</a>
+</div>
+
 <div class="container">
     <table id="group_table">
         <tr>
@@ -41,7 +45,7 @@
     </table>
 </div>
 <footer>
-    <img class="logo" src="https://i.imgur.com/8Og2yc5.png" alt="Logo">
+    <img class="logo" src="/static/images/logo.png" alt="Logo">
 </footer>
 
 <!-- Modal -->

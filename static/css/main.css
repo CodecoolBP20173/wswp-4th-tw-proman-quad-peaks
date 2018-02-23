@@ -12,6 +12,10 @@ html {
     position: relative;
 }
 
+.horseBoardContainer {
+    position: relative;
+}
+
 h1 {
     font-family: 'Monoton', cursive !important;
     position: relative;
@@ -25,17 +29,26 @@ h1 {
     user-select: none
 }
 
+h1 .h1_second_part {
+    color: black;
+}
 .horse {
     width: 130px;
     height: auto;
     position: absolute;
-    top: -1.9%;
+    top: -20%;
     left: 3%;
     -webkit-animation: linear infinite;
-    animation: horse_animation 3s paused;
-    animation-timing-function: linear;
-    animation-fill-mode: backwards;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.horse.active {
+
     z-index: 2;
+    animation-iteration-count: 1;
+    animation: horse_animation 3s ;
+    animation-timing-function: linear;
 
 }
 
@@ -88,7 +101,6 @@ footer {
     alignment: center;
     margin: auto;
 }
-
 footer .logo {
     width: 100%;
     height: auto;
@@ -397,7 +409,7 @@ body {
 
 .removeBoard {
     border-color: black;
-    background-color: #ff540e !important;
+    /*background-color: #ff0008 !important;*/
     border-left: 2px solid black;
     border-top: none;
     border-right: none;
@@ -409,18 +421,28 @@ body {
     border-bottom-right-radius: 0;
     cursor: pointer;
     padding: .375rem .75rem
+    transform: translate(0%,-40%);
+    background: linear-gradient(45deg, #ff000a, #ff7c3b, #ff1000);
+    background-size: 400% 400%;
+    transition: all 0.3s ease;
+    animation: gradient 5s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.01vw 0.1vw 0 #f04900;
+}
 
+@keyframes gradient {
+  50% {
+    background-position: 100% 0;
+  }
 }
 
 .removeBoard:hover {
-    background-color: #ff4c13 !important;
+    background-color: #f40c32 !important;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 15) !important;
     border-color: black;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
 }
-
-/*------------------------------------------------------------------*/
 
 
 
