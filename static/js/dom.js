@@ -203,7 +203,7 @@ dom = {
             window.setTimeout( function () {
                 $('.horse').removeClass("active");
                 dom.global.horseIsReady = true;
-            }, 2500)
+            }, 3000)
     }
 
     // here comes more features
