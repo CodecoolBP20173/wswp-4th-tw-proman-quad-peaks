@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ProMan</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cutive+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/members.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"
+            defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"
+            defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
+            defer></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/members.js') }}" defer></script>
+
+</head>
+<body>
+<div id="header_container">
+    <h1>ProMan<span class="h1_second_part"> Members</span></h1>
+    <a id="goback" href="{{ url_for('boards', group_id=group_id) }}">BACK</a>
+</div>
+<div class="member-page-main-table-holder">
+    <div class="list-members">
+        <h2>
+            Members:
+        </h2>
+        <div class="table-holder-members">
+            <table class="table-members" id="table-members">
+
+            </table>
+        </div>
+    </div>
+
+
+    <div class="search-accounts">
+        <div class="search-header-container">
+            <div class="search-account-input-label-holder">
+                <h2>
+                    Search Users
+                </h2>
+            </div>
+
+            <input id="search-account-input" type="text">
+            <button class="search-account-button">
+            </button>
+        </div>
+        <div id="table_holder_for_search">
+            <table id="search_results_table">
+            </table>
+
+        </div>
+    </div>
+
+
+</div>
+
+<br>
+<br>
+<footer>
+    <img class="logo" src="/static/images/logo.png" alt="Logo">
+</footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+body {
+
+
+
+    background: linear-gradient(to bottom, #244366 35%, #664724 100%);
+
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+
+
+
+.login-card {
+    text-align: center;
+    margin: auto;
+    width:35%;
+    margin-bottom: 50px;
+    padding-top: 3%;
+    padding-bottom: 2%;
+    padding-right: 40px;
+    padding-left: 40px;
+
+
+}
+
+footer {
+    position: relative;
+    width: 10%;
+    height: auto;
+    alignment: center;
+    margin: auto;
+}
+footer .logo {
+    width: 100%;
+    height: auto;
+
+}
+
+.login-register-informative-text-for-developers {
+    color: #faf2a5;
+}
+#user-name-text, #password-text {
+    color: #faf2a5;
+}
+
+
+
+.login-button, .register-button {
+    width: 10vw;
+    height: 3vw;
+
+    left: 30vw;
+    top: 30vh;
+    transform: translate(0%,-40%);
+    font-family: sans-serif;
+    font-size: 1.2vw;
+    letter-spacing: 0.1em;
+    color: #e8e8e8;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: linear-gradient(45deg, #db2c3e,teal,#d350db);
+    background-size: 400% 400%;
+    box-shadow: 0.5vw 0.5vw 0 #f07c0c;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover, .register-button:hover {
+    animation: gradient 10s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.1vw 0.1vw 0 lightcoral;
+  }
+
+
+@keyframes gradient {
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+.back-button {
+    width: 10vw;
+    height: 3vw;
+    left: 30vw;
+    top: 30vh;
+    transform: translate(0%,-40%);
+    font-family: sans-serif;
+    font-size: 1.2vw;
+    letter-spacing: 0.1em;
+    color: #e8e8e8;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: linear-gradient(45deg, #db2d73,teal, #7937db);
+    background-size: 400% 400%;
+    box-shadow: 0.5vw 0.5vw 0 #f08024;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    animation: gradient 10s ease infinite;
+    font-size: 1.3vw;
+    box-shadow: 0.1vw 0.1vw 0 lightcoral;
+  }
+
+.login-form-back-button-holder{
+    position: fixed;
+    top: 50px;
+    right: 0px;
+}
+
+.login-form-error-message-holder, .spec-error-message-holder{
+    color: red;
+    animation: blinker 2s linear infinite;
+    font-size: larger;
+}
+
+
+@keyframes blinker {
+  30% { opacity: 0; }
+}
