@@ -1,49 +1,44 @@
 // It uses data_handler.js to visualize elements
 dom = {
-    global : {
-        selectedAddButtonBoardId : 0,
+    global: {
+        selectedAddButtonBoardId: 0,
         horseIsReady: true,
     },
-    init : function() {
+    init: function () {
         document.getElementById('addBoardSaveButton').addEventListener('click', function () {
             var boardInput = document.getElementById('newBoardInput');
-            if(boardInput.value.length > 0)
-            {
+            if (boardInput.value.length > 0) {
                 dataHandler.createNewBoard(boardInput.value, dom.showBoards);
                 boardInput.value = '';
             }
-            else
-            {
+            else {
                 alert('Board title should be at least 1 character long');
             }
 
         });
         document.getElementById('addCardSaveButton').addEventListener('click', function () {
             var cardTitleInput = document.getElementById('newCardInput');
-            if(cardTitleInput.value.length > 0)
-            {
-                dataHandler.createNewCard(cardTitleInput.value,dom.global.selectedAddButtonBoardId,1,dom.showBoards);
+            if (cardTitleInput.value.length > 0) {
+                dataHandler.createNewCard(cardTitleInput.value, dom.global.selectedAddButtonBoardId, 1, dom.showBoards);
                 cardTitleInput.value = '';
-            }
-            else
-            {
+            } else {
                 alert('Card title should be at least 1 character long');
             }
 
         });
     },
-    loadBoards: function() {
-       dataHandler.getBoards(this.showBoards);
+    loadBoards: function () {
+        dataHandler.getBoards(this.showBoards);
     },
-    showBoards: function(boards_) {
+    showBoards: function (boards_) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
         var drag_containers = dragula({}).on('drop', dom.onDrop);
         let boardsParent = document.getElementById('boards');
-        boardsParent.innerHTML='';
+        boardsParent.innerHTML = '';
         boardsParent.classList.add('container');
         let bin = document.getElementById('bin');
-        let horse ='<img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">';
+        let horse = '<img class="horse" src="https://media.giphy.com/media/26u45LcQt90fuhAis/giphy.gif" alt="Mountain View">';
 
         for (let i = 0; i < boards_.length; i++) {
             let board = boards_[i];
@@ -71,31 +66,28 @@ dom = {
             removeBoardButton.id = board.id;
             removeBoardButton.className = "removeBoard";
             removeBoardButton.addEventListener('click', function () {
-               dataHandler.removeBoard(this.id);
+                dataHandler.removeBoard(this.id);
             });
             buttonRow.appendChild(addCardButton);
             buttonRow.appendChild(removeBoardButton);
             newBoard.className = "btn btn-link col text-left";
-            if(board.is_active)
-            {
+            if (board.is_active) {
                 newBoard.classList.add("opened");
             }
             newBoard.setAttribute('data-toggle', 'collapse');
             newBoard.setAttribute('data-target', '#collapse' + i);
             newBoard.setAttribute('aria-expanded', board.is_active);
             newBoard.setAttribute('aria-controls', 'collapse' + i);
-            newBoard.addEventListener('click' , function () {
+            newBoard.addEventListener('click', function () {
                 let reverseStatus;
-                if(this.getAttribute('aria-expanded') === 'true')
-                {
+                if (this.getAttribute('aria-expanded') === 'true') {
                     this.classList.remove("opened");
                     reverseStatus = 'false';
-                }
-                else{
+                } else {
                     this.classList.add("opened");
                     reverseStatus = 'true';
                 }
-               dataHandler.setActiveStatusForBoard(reverseStatus, board.id);
+                dataHandler.setActiveStatusForBoard(reverseStatus, board.id);
             });
             let statuses = dataHandler.getStatues();
             let newBoardContent = document.createElement("div");
@@ -108,12 +100,11 @@ dom = {
             newBoardContent.appendChild(buttonRow);
             newBoardContent.appendChild(statusRow);
             newBoardContent.appendChild(cardRow);
-            let columns =[];
-            for(let j = 0; j < statuses.length; j++)
-            {
+            let columns = [];
+            for (let j = 0; j < statuses.length; j++) {
                 let column = document.createElement('div');
                 cardRow.appendChild(column);
-                column.id = board.id + "/"+ statuses[j].id;
+                column.id = board.id + "/" + statuses[j].id;
                 column.classList.add('col');
                 let statusHeader = document.createElement('div');
                 statusHeader.className = 'status_header col';
@@ -124,30 +115,26 @@ dom = {
             }
             drag_containers.containers.push(bin);
             newBoardContent.className = 'col container collapse';
-            if(board.is_active)
-            {
+            if (board.is_active) {
                 newBoardContent.classList.add('show')
             }
             newBoardContent.id = 'collapse' + i;
             boardsParent.appendChild(newBoardContent);
-            dom.showCards(cards,columns);
+            dom.showCards(cards, columns);
 
         }
 
     },
-    loadCards: function(boardId) {
+    loadCards: function (boardId) {
         // retrieves cards and makes showCards called
         return dataHandler.getCardsByBoardId(boardId);
     },
-    showCards: function(cards, columns) {
+    showCards: function (cards, columns) {
         // shows the cards of a board
         // it adds necessary event listeners also
-        for(let i = 0; i < cards.length; i++)
-        {
-            for(let j = 0; j < columns.length; j++)
-            {
-                if(cards[i].status_id == columns[j].id.split('/')[1])
-                {
+        for (let i = 0; i < cards.length; i++) {
+            for (let j = 0; j < columns.length; j++) {
+                if (cards[i].status_id == columns[j].id.split('/')[1]) {
                     let cardContainer = document.createElement('div');
                     cardContainer.className = 'card_container';
                     let newCard = document.createElement('div');
@@ -160,7 +147,7 @@ dom = {
             }
         }
     },
-    setSelectedAddButon : function (boardId) {
+    setSelectedAddButon: function (boardId) {
         this.global.selectedAddButtonBoardId = boardId;
     },
     onDrop: function (el, target) {
@@ -174,7 +161,7 @@ dom = {
         dataHandler.setStatusIdForCard(card_id, newStatus_id, newBoard_id);
         if (target.id === 'bin') {
             $('.bin').addClass("animated");
-            window.setTimeout( function () {
+            window.setTimeout(function () {
                 $('.bin').removeClass("animated");
             }, 1000)
         } else {
@@ -193,17 +180,17 @@ dom = {
         for (let j = 0; j < cardList.length; j++) {
             cardList[j].setAttribute('order', j);
             var card_id = parseInt(cardList[j].firstChild.id);
-            dataHandler.setOrderForCard(card_id,j);
+            dataHandler.setOrderForCard(card_id, j);
         }
     },
 
     horseAnimation: function (target, currentBoardNumber) {
         let horseList = document.getElementsByClassName('horse');
-            horseList[currentBoardNumber].classList.add("active");
-            window.setTimeout( function () {
-                $('.horse').removeClass("active");
-                dom.global.horseIsReady = true;
-            }, 3000)
+        horseList[currentBoardNumber].classList.add("active");
+        window.setTimeout(function () {
+            $('.horse').removeClass("active");
+            dom.global.horseIsReady = true;
+        }, 3000)
     }
 
     // here comes more features
